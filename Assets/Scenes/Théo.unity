@@ -835,8 +835,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1810813106}
         m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: Movement
-        m_Mode: 1
+        m_MethodName: OnMovement
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -912,6 +912,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2d7b8849661a7d41b5734c64826b720, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _speed: 5
+  _animator: {fileID: 0}
 --- !u!136 &1810813107
 CapsuleCollider:
   m_ObjectHideFlags: 0

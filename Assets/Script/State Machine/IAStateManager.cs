@@ -8,6 +8,8 @@ public class IAStateManager : MonoBehaviour
     public IABehaviour Behaviour { get; private set; }
 
     // States
+    [SerializeField] private StateEnum _currentStateDisplayed;
+
     private IABaseState _currentState;
     
     private IAHuntState _iaHuntState = new();
@@ -26,6 +28,7 @@ public class IAStateManager : MonoBehaviour
         // enter in the first state
         _currentState = _iaHuntState;
         _currentState.EnterState(this);
+        UpdateCurrentStateEnum();
     }
 
     private void Update()
@@ -53,5 +56,28 @@ public class IAStateManager : MonoBehaviour
     {
         _currentState = state;
         _currentState.EnterState(this);
+        UpdateCurrentStateEnum();
+    }
+
+    public void UpdateCurrentStateEnum()
+    {
+        switch (_currentState)
+        {
+            case IARunState state:
+                _currentStateDisplayed = StateEnum.Run;
+                break;
+
+            case IASeekBombState state:
+                _currentStateDisplayed = StateEnum.SeekBomb;
+                break;
+
+            case IAHuntState state:
+                _currentStateDisplayed = StateEnum.Hunt;
+                break;
+
+            default:
+                _currentStateDisplayed = StateEnum.Dead;
+                break;
+        }
     }
 }

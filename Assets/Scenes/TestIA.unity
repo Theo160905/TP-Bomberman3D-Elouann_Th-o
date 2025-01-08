@@ -320,6 +320,54 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1899002369048597258, guid: 4f95b6843b8587a43874d2d35a571ad0, type: 3}
   m_PrefabInstance: {fileID: 39885212}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &208902616
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 208902617}
+  - component: {fileID: 208902618}
+  m_Layer: 0
+  m_Name: ProtoWall
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &208902617
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 208902616}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.46, y: -3.08, z: 0.37}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!208 &208902618
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 208902616}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &245441128
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,6 +505,37 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1 &341681084
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 341681085}
+  m_Layer: 0
+  m_Name: ProtoBomb
+  m_TagString: Untagged
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &341681085
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341681084}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.09, y: -3.03, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &546309813 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7455079909642525380, guid: 4f95b6843b8587a43874d2d35a571ad0, type: 3}
@@ -607,6 +686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 750ed9c7cd627d9478ca52228ebe427e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _currentStateDisplayed: 0
 --- !u!4 &664595472
 Transform:
   m_ObjectHideFlags: 0
@@ -635,6 +715,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1269889343}
+  BombGizmo: {fileID: 0}
+  WallGizmo: {fileID: 0}
   agent: {fileID: 664595474}
 --- !u!195 &664595474
 NavMeshAgent:
@@ -863,7 +945,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2d7b8849661a7d41b5734c64826b720, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
 --- !u!136 &1245065216
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -946,7 +1027,7 @@ Transform:
   m_GameObject: {fileID: 1245065212}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.04, y: -2.86, z: -2.63}
+  m_LocalPosition: {x: 0.04, y: -2.13, z: -2.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1528,3 +1609,5 @@ SceneRoots:
   - {fileID: 554534427}
   - {fileID: 1699209016}
   - {fileID: 1890846791}
+  - {fileID: 341681085}
+  - {fileID: 208902617}

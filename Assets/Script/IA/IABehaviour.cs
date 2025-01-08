@@ -5,7 +5,13 @@ using UnityEngine.AI;
 
 public class IABehaviour : MonoBehaviour
 {
+    // IA testing
+
     public Transform target;
+    public GameObject BombGizmo;
+    public GameObject WallGizmo;
+
+
 
     //[field: SerializeField]
     public GameObject Bomb { get; private set; }
@@ -17,4 +23,8 @@ public class IABehaviour : MonoBehaviour
         agent.destination = target.position;
     }
 
+    public void GetNearestBomb()
+    {
+
+    }
 }

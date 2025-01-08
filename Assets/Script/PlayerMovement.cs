@@ -5,9 +5,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField]
-    private float _speed = 5;
-
     public Vector2 CurrentMovement { get; set; }
     public bool IsMoving { get; set; } = true;
 

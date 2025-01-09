@@ -39,16 +39,8 @@ public class PlayerMovement : MonoBehaviour
         float targetSpeedX = moveInput.x * WalkTopSpeed;
         float targetSpeedZ = moveInput.y * WalkTopSpeed;
 
-        //Vector3 targetSpeed = moveInput * WalkTopSpeed;
-
-
         float speedDifX = targetSpeedX - _rb.velocity.x;
         float speedDifZ = targetSpeedZ - _rb.velocity.z;
-
-        //Vector3 speedDif = targetSpeed - _rb.velocity;
-
-
-        //Vector3 accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? WalkAcceleration : WalkDeceleration;
 
         float accelRateX = (Mathf.Abs(targetSpeedX) > 0.01f) ? WalkAcceleration : WalkDeceleration;
         float accelRateY = (Mathf.Abs(targetSpeedZ) > 0.01f) ? WalkAcceleration : WalkDeceleration;

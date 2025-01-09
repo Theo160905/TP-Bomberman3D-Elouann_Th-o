@@ -16,9 +16,6 @@ public class IAHuntState : IABaseState
     {
         // comportement
         iaState.Behaviour.agent.destination = iaState.Behaviour.Player.transform.position;
-        Debug.Log($"target pos : { iaState.Behaviour.Player.transform.position} | current targeted pos : {iaState.Behaviour.agent.destination}");
-
-        if (iaState.transform.position == iaState.Behaviour.agent.destination) Debug.Log("nickel"); 
         // si conditions validées, change state
 
         /// si bombe gâchée --> seek bomb state

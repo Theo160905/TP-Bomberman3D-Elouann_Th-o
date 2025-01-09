@@ -11,7 +11,7 @@ public class IABehaviour : MonoBehaviour
     public GameObject BombGizmo;
     public GameObject WallGizmo;
 
-
+    public GameObject Player;
 
     //[field: SerializeField]
     public GameObject Bomb { get; private set; }
@@ -20,7 +20,7 @@ public class IABehaviour : MonoBehaviour
 
     private void Update()
     {
-        agent.destination = target.position;
+        //agent.destination = target.position;
     }
 
     public void GetNearestBomb()

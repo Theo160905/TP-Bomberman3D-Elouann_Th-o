@@ -330,6 +330,7 @@ GameObject:
   m_Component:
   - component: {fileID: 208902617}
   - component: {fileID: 208902618}
+  - component: {fileID: 208902619}
   m_Layer: 0
   m_Name: ProtoWall
   m_TagString: Untagged
@@ -368,6 +369,27 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!135 &208902619
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 208902616}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.74
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &245441128
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,6 +536,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 341681085}
+  - component: {fileID: 341681086}
   m_Layer: 0
   m_Name: ProtoBomb
   m_TagString: Untagged
@@ -536,6 +559,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &341681086
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341681084}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &546309813 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7455079909642525380, guid: 4f95b6843b8587a43874d2d35a571ad0, type: 3}
@@ -608,7 +652,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7dde737b3b9a35345967e491ec24fa04, type: 2}
+  - {fileID: 2100000, guid: 9a2a365043122b741800821391984501, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -696,7 +740,7 @@ Transform:
   m_GameObject: {fileID: 664595470}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.89, z: 0}
+  m_LocalPosition: {x: 5, y: -2.13, z: 3.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -717,6 +761,7 @@ MonoBehaviour:
   target: {fileID: 1269889343}
   BombGizmo: {fileID: 0}
   WallGizmo: {fileID: 0}
+  Player: {fileID: 1245065212}
   agent: {fileID: 664595474}
 --- !u!195 &664595474
 NavMeshAgent:

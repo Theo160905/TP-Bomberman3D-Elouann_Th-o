@@ -31,7 +31,7 @@ public class IAStateManager : MonoBehaviour
         UpdateCurrentStateEnum();
     }
 
-    private void Update()
+    private void Update() // TEMPORARY
     {
         // use the update of the state
         _currentState.UpdateState(this);

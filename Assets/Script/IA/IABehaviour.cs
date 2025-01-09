@@ -25,6 +25,15 @@ public class IABehaviour : MonoBehaviour
 
     public void GetNearestBomb()
     {
-
+        float minDistance = 999;
+        float nearestBombIndex = 0;
+        foreach (GameObject bomb in BombPool.Instance.PoolQueue)
+        {
+            if (Vector3.Distance(bomb.transform.position, this.transform.position) < minDistance)
+            {
+                print("hihi");
+                //nearestBombIndex = BombPool.Instance.PoolQueue.Index
+            }
+        }
     }
 }

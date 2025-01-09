@@ -9,15 +9,15 @@ public class ChangeColorPlayer : MonoBehaviour
     MeshRenderer meshrend;
 
     [SerializeField]
-    Light light;
+    Light _light;
 
     public Color color;
 
     private void Start()
     {
-        light.color = color;
+        _light.color = color;
         meshrend = GetComponent<MeshRenderer>();
-        meshrend.material.SetColor("_EmissionColor", color);
+        meshrend.material.SetColor("_Color", color);
         meshrend.material.EnableKeyword("_EMISSION");
     }
 }

@@ -15,7 +15,7 @@ public class IAHuntState : IABaseState
     public override void UpdateState(IAStateManager iaState)
     {
         // comportement
-        iaState.Behaviour.agent.destination = iaState.Behaviour.Player.transform.position;
+        iaState.Behaviour.Agent.destination = iaState.Behaviour.Player.transform.position;
         // si conditions validées, change state
 
         /// si bombe gâchée --> seek bomb state

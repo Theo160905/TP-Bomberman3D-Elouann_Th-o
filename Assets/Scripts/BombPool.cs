@@ -49,6 +49,8 @@ public class BombPool : MonoBehaviour
         for (int i = 0; i < poolSize; i++)
         {
             GameObject obj = Instantiate(objectPrefab);
+            obj.name = "BombClone" + i.ToString();
+            obj.transform.position -= Vector3.forward * (1f * i);
             obj.SetActive(false);
             PoolQueue.Enqueue(obj);
         }

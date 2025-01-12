@@ -8,12 +8,10 @@ public class IARunState : IABaseState
 {
     public override void EnterState(IAStateManager iaState)
     {
-        Debug.Log("switch to run state");
     }
 
     public override void ExitState(IAStateManager iaState)
     {
-        Debug.Log("exit run state");
     }
 
     public override void UpdateState(IAStateManager iaState)

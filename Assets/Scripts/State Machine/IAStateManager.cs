@@ -6,27 +6,28 @@ public class IAStateManager : MonoBehaviour
 {
     // System
     public IABehaviour Behaviour { get; private set; }
+    public Color SelectedColor;
+    public Color UnselectedColor;
 
     // States
-    [SerializeField] private StateEnum _currentStateDisplayed;
+    public StateEnum CurrentStateDisplayed;
 
     private IABaseState _currentState;
     
-    private IAHuntState _iaHuntState = new();
-    private IASeekBombState _iaSeekBombState = new();
-    private IARunState _iaRunState = new();
-    private IADeathState _iaDeathState = new();
+    public IAHuntState IAHuntState = new();
+    public IASeekBombState IASeekBombState = new();
+    public IARunState IARunState = new();
+    public IADeathState IADeathState = new();
 
     private void Awake()
     {
         Behaviour = TryGetComponent(out IABehaviour behaviour) ? behaviour : null;
-        print(Behaviour);
     }
 
     private void Start()
     {
         // enter in the first state
-        _currentState = _iaHuntState;
+        _currentState = IAHuntState;
         _currentState.EnterState(this);
         UpdateCurrentStateEnum();
     }
@@ -35,21 +36,6 @@ public class IAStateManager : MonoBehaviour
     {
         // use the update of the state
         _currentState.UpdateState(this);
-
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            SwitchState(_iaHuntState);
-        }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            SwitchState(_iaRunState);
-        }
-
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            SwitchState(_iaSeekBombState);
-        }
     }
 
     public void SwitchState(IABaseState state)
@@ -64,19 +50,19 @@ public class IAStateManager : MonoBehaviour
         switch (_currentState)
         {
             case IARunState state:
-                _currentStateDisplayed = StateEnum.Run;
+                CurrentStateDisplayed = StateEnum.Run;
                 break;
 
             case IASeekBombState state:
-                _currentStateDisplayed = StateEnum.SeekBomb;
+                CurrentStateDisplayed = StateEnum.SeekBomb;
                 break;
 
             case IAHuntState state:
-                _currentStateDisplayed = StateEnum.Hunt;
+                CurrentStateDisplayed = StateEnum.Hunt;
                 break;
 
             default:
-                _currentStateDisplayed = StateEnum.Dead;
+                CurrentStateDisplayed = StateEnum.Dead;
                 break;
         }
     }

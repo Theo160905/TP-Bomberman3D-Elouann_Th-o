@@ -4,18 +4,19 @@ public class IAHuntState : IABaseState
 {
     public override void EnterState(IAStateManager iaState)
     {
-        Debug.Log("switch to hunt state");
     }
 
     public override void ExitState(IAStateManager iaState)
     {
-        Debug.Log("exit hunt state");
+        iaState.Behaviour.Agent.isStopped = true;
     }
 
     public override void UpdateState(IAStateManager iaState)
     {
         // comportement
-        iaState.Behaviour.Agent.destination = iaState.Behaviour.Player.transform.position;
+        Vector3 targetPos = new Vector3(iaState.Behaviour.Player.transform.position.x, iaState.transform.position.y, iaState.Behaviour.Player.transform.position.z);
+        
+        iaState.Behaviour.Agent.destination = targetPos;
         // si conditions validées, change state
 
         /// si bombe gâchée --> seek bomb state

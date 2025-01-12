@@ -2307,7 +2307,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 750ed9c7cd627d9478ca52228ebe427e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentStateDisplayed: 0
+  SelectedColor: {r: 1, g: 0.8533517, b: 0.54905653, a: 1}
+  UnselectedColor: {r: 1, g: 1, b: 1, a: 1}
+  CurrentStateDisplayed: 0
 --- !u!4 &664595472
 Transform:
   m_ObjectHideFlags: 0
@@ -2317,7 +2319,7 @@ Transform:
   m_GameObject: {fileID: 664595470}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.56, z: -3.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2335,11 +2337,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 276ecafdfe4ab88448f9eff3a0ea0c0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fov: 5
-  maxRange: 5
-  minRange: 5
-  aspect: 5
   Player: {fileID: 1245065212}
+  Detected1: {fileID: 0}
+  Detected2: {fileID: 0}
+  Detected3: {fileID: 0}
+  Detected4: {fileID: 0}
   <Bomb>k__BackingField: {fileID: 0}
   Agent: {fileID: 664595474}
 --- !u!195 &664595474
@@ -4144,7 +4146,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1064851653
 Transform:
   m_ObjectHideFlags: 0
@@ -4560,7 +4562,7 @@ Transform:
   m_GameObject: {fileID: 1245065212}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.56, z: 0}
+  m_LocalPosition: {x: 0, y: 1.741667, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

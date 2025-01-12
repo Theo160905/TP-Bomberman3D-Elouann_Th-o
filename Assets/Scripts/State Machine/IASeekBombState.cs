@@ -19,7 +19,7 @@ public class IASeekBombState : IABaseState
 
         #region State Change Conditions
         // Hunt
-        if (iaState.Behaviour.Bomb != null)
+        if (iaState.Behaviour.Bombs.Count != 0)
         {
             iaState.SwitchState(iaState.IAHuntState);
         }

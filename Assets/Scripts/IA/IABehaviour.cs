@@ -7,6 +7,7 @@ public class IABehaviour : MonoBehaviour
 {
     // IA testing
     public GameObject Player;
+    public Color TargetColor;
 
     private Ray _sensorRay1;
     private Ray _sensorRay2;
@@ -19,7 +20,7 @@ public class IABehaviour : MonoBehaviour
     public GameObject Detected4;
 
     [field: SerializeField]
-    public GameObject Bomb { get; private set; }
+    public Queue<GameObject> Bombs { get; private set; }
 
     public NavMeshAgent Agent;
 
@@ -42,22 +43,22 @@ public class IABehaviour : MonoBehaviour
         _sensorRay3 = new Ray(this.transform.position, -Vector3.right * 3);
         _sensorRay4 = new Ray(this.transform.position, Vector3.right * 3);
 
-        if (Physics.SphereCast(_sensorRay1, 0.5f, out RaycastHit hit1))
+        if (Physics.SphereCast(_sensorRay1, 0.3f, out RaycastHit hit1))
         {
             Detected1 = hit1.collider.gameObject;
         }
 
-        if (Physics.SphereCast(_sensorRay2, 0.5f, out RaycastHit hit2))
+        if (Physics.SphereCast(_sensorRay2, 0.3f, out RaycastHit hit2))
         {
             Detected2 = hit2.collider.gameObject;
         }
 
-        if (Physics.SphereCast(_sensorRay3, 0.5f, out RaycastHit hit3))
+        if (Physics.SphereCast(_sensorRay3, 0.3f, out RaycastHit hit3))
         {
             Detected3 = hit3.collider.gameObject;
         }
 
-        if (Physics.SphereCast(_sensorRay4, 0.5f, out RaycastHit hit4))
+        if (Physics.SphereCast(_sensorRay4, 0.3f, out RaycastHit hit4))
         {
             Detected4 = hit4.collider.gameObject;
         }
@@ -86,5 +87,7 @@ public class IABehaviour : MonoBehaviour
         Gizmos.DrawRay(_sensorRay2);
         Gizmos.DrawRay(_sensorRay3);
         Gizmos.DrawRay(_sensorRay4);
+        Gizmos.color = TargetColor;
+        Gizmos.DrawSphere(Agent.destination, 0.5f);
     }
 }

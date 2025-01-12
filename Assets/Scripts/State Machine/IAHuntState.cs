@@ -15,8 +15,8 @@ public class IAHuntState : IABaseState
     {
         // comportement
         Vector3 targetPos = new Vector3(iaState.Behaviour.Player.transform.position.x, iaState.transform.position.y, iaState.Behaviour.Player.transform.position.z);
-        
         iaState.Behaviour.Agent.destination = targetPos;
+
         // si conditions validées, change state
 
         /// si bombe gâchée --> seek bomb state

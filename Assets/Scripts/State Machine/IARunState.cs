@@ -21,7 +21,7 @@ public class IARunState : IABaseState
         // si conditions validées, change state
 
         /// si en sécurité, sans bombe -->  seek bomb state
-        if(iaState.Behaviour.Bomb == null)
+        if(iaState.Behaviour.Bombs.Count == 0)
         {
             Debug.Log("bibo");
         }

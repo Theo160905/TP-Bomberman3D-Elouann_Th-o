@@ -35,11 +35,6 @@ public class IABehaviour : MonoBehaviour
         }
     }
 
-    public GameObject GetDanger()
-    {
-
-    }
-
     private void FixedUpdate()
     {
         _sensorRay1 = new Ray(this.transform.position, Vector3.forward * 3);

@@ -63,5 +63,9 @@ public class PlayerMovement : MonoBehaviour
             frictionZ *= Mathf.Sign(_rb.velocity.y);
             _rb.AddForce(Vector3.forward * -frictionZ);
         }
+
+        if (moveInput == Vector2.zero) return;
+        this.transform.rotation = Quaternion.LookRotation(new Vector3(-moveInput.y, 0, moveInput.x));
+
     }
 }

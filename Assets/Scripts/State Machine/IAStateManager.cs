@@ -27,7 +27,7 @@ public class IAStateManager : MonoBehaviour
     private void Start()
     {
         // enter in the first state
-        _currentState = IAHuntState;
+        _currentState = IASeekBombState;
         _currentState.EnterState(this);
         UpdateCurrentStateEnum();
     }

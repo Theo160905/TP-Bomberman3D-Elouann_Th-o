@@ -5,10 +5,9 @@ using UnityEngine.AI;
 
 public class IABehaviour : MonoBehaviour
 {
-    [Header("References")]
-    public GameObject Player;
+    [Header("Components")]
+    public GameObject PlayerTarget;
     public NavMeshAgent Agent;
-    public Color TargetColor;
 
     private Ray _sensorRay1;
     private Ray _sensorRay2;
@@ -21,8 +20,10 @@ public class IABehaviour : MonoBehaviour
     public GameObject Detected3;
     public GameObject Detected4;
 
+    [Header("Debug")]
+    public Color TargetColor;
     [field: SerializeField]
-    public Queue<GameObject> Bombs { get; private set; }
+    public Queue<GameObject> Bombs { get; private set; } = new();
 
 
     private void Update()
@@ -33,7 +34,7 @@ public class IABehaviour : MonoBehaviour
         {
             if (Agent.isStopped) return;
             print("dest reached");
-            Agent.isStopped = true;
+            //Agent.isStopped = true;
         }
     }
 

@@ -16,8 +16,9 @@ public class PlayerUseBomb : MonoBehaviour
             if (usebomb) return;
             StartCoroutine(Wait());
             bombList[0].gameObject.SetActive(true);
-            bombList[0].transform.position = gameObject.transform.position;
-            //bombList[0].transform.position = new Vector3(Mathf.RoundToInt(gameObject.transform.position.x), gameObject.transform.position.y, Mathf.RoundToInt(gameObject.transform.position.z));
+            //bombList[0].transform.position = gameObject.transform.position;
+            bombList[0].transform.position = new Vector3(Mathf.RoundToInt(gameObject.transform.position.x), gameObject.transform.position.y - 0.5f, Mathf.RoundToInt(gameObject.transform.position.z));
+            bombList[0].gameObject.GetComponent<Bomb>().ExplodeBomb();
             bombList[0] = bombList[1];
             bombList[1] = bombList[2];
             bombList[2] = null;

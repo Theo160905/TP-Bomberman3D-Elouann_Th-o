@@ -5,8 +5,9 @@ using UnityEngine.AI;
 
 public class IABehaviour : MonoBehaviour
 {
-    // IA testing
+    [Header("References")]
     public GameObject Player;
+    public NavMeshAgent Agent;
     public Color TargetColor;
 
     private Ray _sensorRay1;
@@ -14,6 +15,7 @@ public class IABehaviour : MonoBehaviour
     private Ray _sensorRay3;
     private Ray _sensorRay4;
 
+    [Header("Detected objects")]
     public GameObject Detected1;
     public GameObject Detected2;
     public GameObject Detected3;
@@ -22,7 +24,6 @@ public class IABehaviour : MonoBehaviour
     [field: SerializeField]
     public Queue<GameObject> Bombs { get; private set; }
 
-    public NavMeshAgent Agent;
 
     private void Update()
     {

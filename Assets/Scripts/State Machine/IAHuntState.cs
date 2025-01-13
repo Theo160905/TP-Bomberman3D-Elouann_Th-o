@@ -18,6 +18,11 @@ public class IAHuntState : IABaseState
         iaState.Behaviour.Agent.destination = targetPos;
 
         // si conditions validées, change state
+        if (iaState.Behaviour.Bombs.Count <= 0)
+        {
+            iaState.SwitchState(iaState.IASeekBombState);
+        }
+
 
         /// si bombe gâchée --> seek bomb state
         /// si bombe dangereuse posée --> run state

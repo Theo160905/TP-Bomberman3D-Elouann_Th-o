@@ -32,8 +32,9 @@ public class PlayerUseBomb : MonoBehaviour
     {
         if(other.gameObject.layer == 7)
         {
-            if (other.GetComponent<Bomb>().CanBeRecup)
+            if (other.TryGetComponent(out Bomb bomb))
             {
+                if (!bomb.CanBeRecup) return;
                 other.GetComponent<Bomb>().CanBeRecup = false;
                 for(int i = 0; i < bombList.Length; i++)
                 {

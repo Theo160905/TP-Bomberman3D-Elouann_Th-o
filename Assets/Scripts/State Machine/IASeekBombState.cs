@@ -15,6 +15,7 @@ public class IASeekBombState : IABaseState
     public override void UpdateState(IAStateManager iaState)
     {
         // comportement
+        //iaState.Behaviour.Agent.destination = iaState.Behaviour.GetNearestBomb().transform.position;
 
         // si conditions validées, change state
 
@@ -33,10 +34,10 @@ public class IASeekBombState : IABaseState
         /// si vie = 0 --> death state
     }
 
-    private bool _firstCheck;
-    private bool _scndCheck;
+    private static bool _firstCheck;
+    private static bool _scndCheck;
 
-    private bool Check()
+    public static bool Check()
     {
         if(!_firstCheck)
         {

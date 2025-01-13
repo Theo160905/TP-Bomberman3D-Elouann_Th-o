@@ -10,38 +10,6 @@ public class PlayerHealth : MonoBehaviour
 
     private bool IsInvulnerable = false;
 
-    //Singleton
-    #region Singleton
-    private static PlayerHealth _instance;
-
-    public static PlayerHealth Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                GameObject go = new GameObject("PlayerHealth");
-                _instance = go.AddComponent<PlayerHealth>();
-            }
-            return _instance;
-        }
-    }
-
-    private void Awake()
-    {
-        if (_instance != null)
-        {
-            Destroy(this.gameObject);
-            Debug.Log($"<b><color=#{UnityEngine.Random.ColorHSV(0f, 1f, 1f, 1f, 0f, 0f, 1f, 1f).ToHexString()}>{this.GetType()}</color> instance <color=#eb624d>destroyed</color></b>");
-        }
-        else
-        {
-            _instance = this;
-            Debug.Log($"<b><color=#{UnityEngine.Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f, 1f, 1f).ToHexString()}>{this.GetType()}</color> instance <color=#58ed7d>created</color></b>");
-        }
-    }
-    #endregion
-
     public void AddHealth()
     {
         Health = Mathf.Clamp(Health + 1, 0, 3);

@@ -54,6 +54,7 @@ public class SpawnerBomb : MonoBehaviour
             if (NavMesh.SamplePosition(randomPosition, out hit, spawnRadius, NavMesh.AllAreas))
             {
                 GameObject game = ObjectPoolBomb.Instance.GetBomb();
+                game.GetComponent<Bomb>().IsOnMap = true;
                 game.transform.position = randomPosition;
                 spawned = true;
             }

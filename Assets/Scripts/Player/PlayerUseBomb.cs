@@ -40,6 +40,7 @@ public class PlayerUseBomb : MonoBehaviour
                     {
                         bombList[i] = other.gameObject;
                         other.gameObject.SetActive(false);
+                        other.gameObject.GetComponent<Bomb>().IsOnMap = true;
                         return;
                     }
                 }             

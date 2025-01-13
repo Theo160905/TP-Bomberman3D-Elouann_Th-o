@@ -79,9 +79,4 @@ public class ObjectPoolExplosion : MonoBehaviour
         obj.SetActive(false);
         PoolQueue.Enqueue(obj);
     }
-
-    public void OnSpawn()
-    {
-
-    }
 }

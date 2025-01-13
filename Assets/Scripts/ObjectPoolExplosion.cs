@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class BombPool : MonoBehaviour
+public class ObjectPoolExplosion : MonoBehaviour
 {
     public GameObject objectPrefab;
     public int poolSize = 10;
@@ -12,16 +12,16 @@ public class BombPool : MonoBehaviour
 
     // Singleton
     #region Singleton
-    private static BombPool _instance;
+    private static ObjectPoolExplosion _instance;
 
-    public static BombPool Instance
+    public static ObjectPoolExplosion Instance
     {
         get
         {
             if (_instance == null)
             {
-                GameObject go = new GameObject("Bomb Pool");
-                _instance = go.AddComponent<BombPool>();
+                GameObject go = new GameObject("ObjectPoolExplosion");
+                _instance = go.AddComponent<ObjectPoolExplosion>();
             }
             return _instance;
         }
@@ -49,15 +49,15 @@ public class BombPool : MonoBehaviour
         for (int i = 0; i < poolSize; i++)
         {
             GameObject obj = Instantiate(objectPrefab);
-            obj.name = "BombClone" + i.ToString();
+            obj.transform.parent = transform;
+            obj.name = objectPrefab.name + i.ToString();
             obj.transform.position -= Vector3.forward * (1f * i);
             obj.SetActive(false);
             PoolQueue.Enqueue(obj);
         }
-        OnSpawnBomb();
     }
 
-    public GameObject GetBomb(GameObject gameObject)
+    public GameObject GetObject(GameObject gameObject)
     {
         if (PoolQueue.Count > 0)
         {
@@ -69,6 +69,7 @@ public class BombPool : MonoBehaviour
         else
         {
             GameObject obj = Instantiate(objectPrefab);
+            obj.transform.parent = transform;
             return obj;
         }
     }
@@ -77,10 +78,9 @@ public class BombPool : MonoBehaviour
     {
         obj.SetActive(false);
         PoolQueue.Enqueue(obj);
-        OnSpawnBomb();
     }
 
-    public void OnSpawnBomb()
+    public void OnSpawn()
     {
 
     }

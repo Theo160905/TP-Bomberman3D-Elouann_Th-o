@@ -9,6 +9,7 @@ public class IABehaviour : MonoBehaviour
     [Header("System")]
     public GameObject PlayerTarget;
     public NavMeshAgent Agent;
+    public IABombDetectionRadius bombDetector;
 
     private Ray _sensorRay1;
     private Ray _sensorRay2;
@@ -34,8 +35,6 @@ public class IABehaviour : MonoBehaviour
         if (Vector3.Distance(Agent.destination, this.transform.position) <= 1.5f)
         {
             if (Agent.isStopped) return;
-            print("dest reached");
-            //Agent.isStopped = true;
         }
     }
 

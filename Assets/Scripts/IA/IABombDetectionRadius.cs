@@ -9,7 +9,8 @@ public class IABombDetectionRadius : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.layer == 7 && other.gameObject.TryGetComponent(out Bomb bomb))
-        {
+        { 
+            print("truc");
             if (bomb.CanBeRecup) return;
             DetectedDangerousBombs.Add(other.gameObject);
         }

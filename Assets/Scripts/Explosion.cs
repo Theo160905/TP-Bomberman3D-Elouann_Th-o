@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class Explosion : MonoBehaviour
@@ -13,5 +14,13 @@ public class Explosion : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         gameObject.SetActive(false);
+    }
+        
+    public void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.layer == 3)
+        {
+            other.gameObject.GetComponent<PlayerHealth>().RemoveHealth();
+        }
     }
 }

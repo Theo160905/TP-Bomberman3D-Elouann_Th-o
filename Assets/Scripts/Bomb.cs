@@ -10,10 +10,7 @@ public class Bomb : MonoBehaviour
 
     public LayerMask levelMask;
 
-    private void Update()
-    {
-        
-    }
+    public bool IsOnMap;
 
     public void ExplodeBomb()
     {
@@ -31,6 +28,7 @@ public class Bomb : MonoBehaviour
 
     public IEnumerator CreateExplosion(Vector3 direction)
     {
+        yield return new WaitForSeconds(3f);
         GameObject game = ObjectPoolExplosion.Instance.GetObject(gameObject);
         game.SetActive(true);
         game.transform.position = transform.position;

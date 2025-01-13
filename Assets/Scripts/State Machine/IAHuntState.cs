@@ -24,6 +24,12 @@ public class IAHuntState : IABaseState
         Vector3 targetPos = new Vector3(iaState.Behaviour.PlayerTarget.transform.position.x, iaState.transform.position.y, iaState.Behaviour.PlayerTarget.transform.position.z);
         iaState.Behaviour.Agent.destination = targetPos;
 
+        if (iaState.Behaviour.GetDetectedPlayer() == null) return;
+        if (Vector3.Distance(iaState.Behaviour.GetDetectedPlayer().transform.position, iaState.transform.position) <= 4)
+        {
+            iaState.Behaviour.UseBomb();
+        }
+
         /// si bombe gâchée --> seek bomb state
         /// si bombe dangereuse posée --> run state
         /// si vie = 0 --> death state

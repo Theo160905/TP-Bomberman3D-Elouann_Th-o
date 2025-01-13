@@ -31,6 +31,10 @@ public class Bomb : MonoBehaviour
 
     public IEnumerator CreateExplosion(Vector3 direction)
     {
+        GameObject game = ObjectPoolExplosion.Instance.GetObject(gameObject);
+        game.SetActive(true);
+        game.transform.position = transform.position;
+
         for (int i = 1; i < 3; i++)
         {
             RaycastHit hit;
@@ -38,8 +42,10 @@ public class Bomb : MonoBehaviour
 
             if (!hit.collider)
             {
-                Instantiate(Explosion, transform.position + (i * direction),
-                Explosion.transform.rotation);
+                GameObject obj = ObjectPoolExplosion.Instance.GetObject(gameObject);
+                obj.SetActive(true);
+                obj.transform.position = transform.position+ (i*direction);
+                //Instantiate(Explosion, transform.position + (i * direction),Explosion.transform.rotation);
             }
             else
             {
@@ -47,6 +53,6 @@ public class Bomb : MonoBehaviour
             }
             yield return new WaitForSeconds(.05f);
         }
-
+        gameObject.SetActive(false);
     }
 }

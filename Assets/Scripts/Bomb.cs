@@ -50,5 +50,6 @@ public class Bomb : MonoBehaviour
             }
             yield return new WaitForSeconds(.05f);
         }
+        ObjectPoolBomb.Instance.ReturnObject(gameObject);
     }
 }

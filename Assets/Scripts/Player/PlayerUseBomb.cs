@@ -14,6 +14,7 @@ public class PlayerUseBomb : MonoBehaviour
         if (bombList[0] != null)
         {
             if (usebomb) return;
+            SpawnerBomb.Instance.spawnCount--;
             StartCoroutine(Wait());
             bombList[0].gameObject.SetActive(true);
             //bombList[0].transform.position = gameObject.transform.position;

@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ObjectPoolBomb : MonoBehaviour
 {
+
     public GameObject objectPrefab;
     public int poolSize = 10;
 
@@ -54,10 +56,14 @@ public class ObjectPoolBomb : MonoBehaviour
             obj.SetActive(false);
             PoolQueue.Enqueue(obj);
         }
-        OnSpawnBomb();
+
+        while (SpawnerBomb.Instance.spawnCount < 5)
+        {
+            SpawnerBomb.Instance.OnSpawnBomb();
+        }
     }
 
-    public GameObject GetBomb(GameObject gameObject)
+    public GameObject GetBomb()
     {
         if (PoolQueue.Count > 0)
         {
@@ -77,11 +83,6 @@ public class ObjectPoolBomb : MonoBehaviour
     {
         obj.SetActive(false);
         PoolQueue.Enqueue(obj);
-        OnSpawnBomb();
-    }
-
-    public void OnSpawnBomb()
-    {
-
+        SpawnerBomb.Instance.OnSpawnBomb();
     }
 }

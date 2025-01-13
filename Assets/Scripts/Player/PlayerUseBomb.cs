@@ -40,7 +40,6 @@ public class PlayerUseBomb : MonoBehaviour
                     {
                         bombList[i] = other.gameObject;
                         other.gameObject.SetActive(false);
-                        Debug.Log(bombList[i]);
                         return;
                     }
                 }             

@@ -38,7 +38,7 @@ public class Bomb : MonoBehaviour
         for (int i = 1; i < 3; i++)
         {
             RaycastHit hit;
-            Physics.Raycast(transform.position + new Vector3(0, .5f, 0), direction, out hit,i,levelMask);
+            Physics.SphereCast(transform.position + new Vector3(0, .5f, 0),0.25f, direction, out hit, i, levelMask);
 
             if (!hit.collider)
             {
@@ -53,6 +53,5 @@ public class Bomb : MonoBehaviour
             }
             yield return new WaitForSeconds(.05f);
         }
-        gameObject.SetActive(false);
     }
 }

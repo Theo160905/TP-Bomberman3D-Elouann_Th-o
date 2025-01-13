@@ -45,7 +45,6 @@ public class Bomb : MonoBehaviour
                 GameObject obj = ObjectPoolExplosion.Instance.GetObject(gameObject);
                 obj.SetActive(true);
                 obj.transform.position = transform.position+ (i*direction);
-                //Instantiate(Explosion, transform.position + (i * direction),Explosion.transform.rotation);
             }
             else
             {

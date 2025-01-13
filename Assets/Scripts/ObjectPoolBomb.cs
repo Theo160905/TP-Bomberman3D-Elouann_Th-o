@@ -10,8 +10,6 @@ public class ObjectPoolBomb : MonoBehaviour
     public GameObject objectPrefab;
     public int poolSize = 10;
 
-    public float spawnRadius = 5f;
-
     public Queue<GameObject> PoolQueue { get; private set; }
 
     // Singleton
@@ -58,10 +56,14 @@ public class ObjectPoolBomb : MonoBehaviour
             obj.SetActive(false);
             PoolQueue.Enqueue(obj);
         }
-        OnSpawnBomb(gameObject.transform.position);
+
+        while (SpawnerBomb.Instance.spawnCount < 5)
+        {
+            SpawnerBomb.Instance.OnSpawnBomb();
+        }
     }
 
-    public GameObject GetBomb(GameObject gameObject)
+    public GameObject GetBomb()
     {
         if (PoolQueue.Count > 0)
         {
@@ -81,33 +83,6 @@ public class ObjectPoolBomb : MonoBehaviour
     {
         obj.SetActive(false);
         PoolQueue.Enqueue(obj);
-        OnSpawnBomb(gameObject.transform.position);
+        SpawnerBomb.Instance.OnSpawnBomb();
     }
-
-    public void OnSpawnBomb(Vector3 spawnPosition)
-    {
-            bool spawned = false;
-            int attempts = 0;
-
-            while (!spawned && attempts < 10)
-            {
-                Vector3 randomPosition = spawnPosition + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0, Random.Range(-spawnRadius, spawnRadius));
-
-                NavMeshHit hit;
-                if (NavMesh.SamplePosition(randomPosition, out hit, spawnRadius, NavMesh.AllAreas))
-                {
-                    GetBomb(gameObject);
-                    spawned = true;
-                }
-                else
-                {
-                    attempts++;
-                }
-            }
-
-            if (!spawned)
-            {
-                Debug.LogError("Aucun point valide trouvé sur la NavMesh après plusieurs tentatives.");
-            }
-        }
 }

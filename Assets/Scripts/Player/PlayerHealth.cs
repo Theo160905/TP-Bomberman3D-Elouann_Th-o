@@ -20,7 +20,7 @@ public class PlayerHealth : MonoBehaviour
     public void RemoveHealth()
     {
         if (IsInvulnerable) return;
-        Health = Mathf.Clamp(Health -1 , 0, 3);
+        Health--;
         StartCoroutine(TimeInvulnerable());
         CheckHealth();
         _lifeHeartJuice[Health].Juice();

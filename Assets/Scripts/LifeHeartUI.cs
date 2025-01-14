@@ -33,19 +33,13 @@ public class LifeHeartUI : MonoBehaviour
         _rightHalfBasePos = _rightHalf.transform.localPosition;
     }
 
-    public void Test()
+    public void Juice()
     {
         _leftHalfSequence = DOTween.Sequence();
         _rightHalfSequence = DOTween.Sequence();
-
-        //_leftHalfSequence.Append(_leftHalf.transform.DOLocalMove(_leftHalfFinalPos, 0.5f))
-        //    .Append(_leftHalf.DOColor(_damagedColor, 0.5f));
         
         _leftHalf.transform.DOLocalMove(_leftHalfFinalPos, 0.6f).SetEase(Ease.OutQuart);
         _leftHalfSequence.Append(_leftHalf.DOColor(_damagedColor, 0.5f)).Append(_leftHalf.transform.DOLocalRotate(Vector3.forward * 15, 0.7f).SetEase(Ease.InOutCubic)).Insert(0.6f, _leftHalf.transform.DOScale(0.8f, 0.5f).SetEase(Ease.OutBounce));
-
-        //_rightHalfSequence.Append(_rightHalf.transform.DOLocalMove(_rightHalfFinalPos, 0.5f))
-        //    .Append(_rightHalf.DOColor(_damagedColor, 0.5f));
         
         _rightHalf.transform.DOLocalMove(_rightHalfFinalPos, 0.6f).SetEase(Ease.OutQuart);
         _rightHalfSequence.Append(_rightHalf.DOColor(_damagedColor, 0.5f)).Append(_rightHalf.transform.DOLocalRotate(Vector3.back * 15, 0.7f).SetEase(Ease.InOutCubic)).Insert(0.6f, _rightHalf.transform.DOScale(0.8f, 0.5f).SetEase(Ease.OutBounce));
@@ -54,16 +48,6 @@ public class LifeHeartUI : MonoBehaviour
     }
 
     private void Reset()
-    {
-
-    }
-
-    private void Slash()
-    {
-
-    }
-
-    private void DisassembleHalves()
     {
 
     }

@@ -5418,6 +5418,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 3
+  _lifeHeartJuice:
+  - {fileID: 21675060}
+  - {fileID: 2051514828}
+  - {fileID: 456033753}
 --- !u!1 &1261682168
 GameObject:
   m_ObjectHideFlags: 0
@@ -8125,7 +8129,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 456033753}
         m_TargetAssemblyTypeName: LifeHeartUI, Assembly-CSharp
-        m_MethodName: Test
+        m_MethodName: Juice
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9074,6 +9078,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2938506496589694241, guid: 93225c52109e991469417e5c9cea44bf, type: 3}
+      propertyPath: m_Radius
+      value: 8.467657
+      objectReference: {fileID: 0}
+    - target: {fileID: 2938506496589694241, guid: 93225c52109e991469417e5c9cea44bf, type: 3}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3562277735249416591, guid: 93225c52109e991469417e5c9cea44bf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.77
+      objectReference: {fileID: 0}
     - target: {fileID: 7510072558878858366, guid: 93225c52109e991469417e5c9cea44bf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

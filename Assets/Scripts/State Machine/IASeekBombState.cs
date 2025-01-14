@@ -10,6 +10,7 @@ public class IASeekBombState : IABaseState
 
     public override void ExitState(IAStateManager iaState)
     {
+    
     }
 
     public override void UpdateState(IAStateManager iaState)

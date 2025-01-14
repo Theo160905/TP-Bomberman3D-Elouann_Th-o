@@ -10,6 +10,8 @@ public class PlayerHealth : MonoBehaviour
 
     private bool IsInvulnerable = false;
 
+    [SerializeField] private List<LifeHeartUI> _lifeHeartJuice;
+
     public void AddHealth()
     {
         Health = Mathf.Clamp(Health + 1, 0, 3);
@@ -21,6 +23,7 @@ public class PlayerHealth : MonoBehaviour
         Health = Mathf.Clamp(Health -1 , 0, 3);
         StartCoroutine(TimeInvulnerable());
         CheckHealth();
+        _lifeHeartJuice[Health].Juice();
     }
 
     public void CheckHealth()

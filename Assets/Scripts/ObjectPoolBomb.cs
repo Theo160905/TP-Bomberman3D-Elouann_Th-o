@@ -81,7 +81,6 @@ public class ObjectPoolBomb : MonoBehaviour
 
     public void ReturnObject(GameObject obj)
     {
-        obj.gameObject.GetComponent<Bomb>().CanBeRecup = true;
         obj.SetActive(false);
         PoolQueue.Enqueue(obj);
         SpawnerBomb.Instance.OnSpawnBomb();

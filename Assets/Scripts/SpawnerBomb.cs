@@ -55,14 +55,15 @@ public class SpawnerBomb : MonoBehaviour
             {
                 GameObject game = ObjectPoolBomb.Instance.GetBomb();
                 game.GetComponent<Bomb>().IsOnMap = true;
+                //game.GetComponent<Bomb>().CanBeRecup = true;
                 game.transform.position = randomPosition;
                 spawned = true;
+                spawnCount++;
             }
             else
             {
                 attempts++;
             }
-            spawnCount++;
         }
 
         if (!spawned && spawnCount < 5)

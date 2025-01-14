@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bomb : MonoBehaviour
 {
-    public bool CanBeRecup = true;
+    public bool CanBeRecup;
 
     public GameObject Explosion;
 
@@ -12,18 +12,25 @@ public class Bomb : MonoBehaviour
 
     public bool IsOnMap;
 
+    public void Start()
+    {
+        CanBeRecup =true; 
+    }
+
+    public void Update()
+    {
+        if (IsOnMap)
+        {
+            CanBeRecup = true;
+        }
+    }
+
     public void ExplodeBomb()
     {
-        CanBeRecup = false;
         StartCoroutine(CreateExplosion(Vector3.forward));
         StartCoroutine(CreateExplosion(Vector3.back));
         StartCoroutine(CreateExplosion(Vector3.right));
         StartCoroutine(CreateExplosion(Vector3.left));
-    }
-
-    public IEnumerator TimeToExplode()
-    {
-        yield return new WaitForSeconds(3);
     }
 
     public IEnumerator CreateExplosion(Vector3 direction)

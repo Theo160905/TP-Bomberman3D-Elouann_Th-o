@@ -35,14 +35,14 @@ public class PlayerUseBomb : MonoBehaviour
             if (other.TryGetComponent(out Bomb bomb))
             {
                 if (!bomb.CanBeRecup) return;
-                other.GetComponent<Bomb>().CanBeRecup = false;
                 for(int i = 0; i < bombList.Length; i++)
                 {
                     if (bombList[i] == null)
                     {
                         bombList[i] = other.gameObject;
                         other.gameObject.SetActive(false);
-                        other.gameObject.GetComponent<Bomb>().IsOnMap = true;
+                        bomb.IsOnMap = false;
+                        bomb.CanBeRecup = false;
                         return;
                     }
                 }             
@@ -53,7 +53,7 @@ public class PlayerUseBomb : MonoBehaviour
     private IEnumerator Wait()
     {
         usebomb = true;
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(0.25f);
         usebomb = false;
     }
 }

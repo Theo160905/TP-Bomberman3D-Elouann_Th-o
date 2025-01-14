@@ -20,6 +20,7 @@ public class Explosion : MonoBehaviour
     {
         if(other.gameObject.layer == 3)
         {
+            print(other.gameObject);
             other.gameObject.GetComponent<PlayerHealth>().RemoveHealth();
         }
     }

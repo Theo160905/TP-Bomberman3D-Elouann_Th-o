@@ -73,16 +73,17 @@ public class IABehaviour : MonoBehaviour
     // Permet à l'IA de ramasser les bombes
     public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 7 && other.GetComponent<Bomb>().CanBeRecup)
+        if (other.gameObject.layer == 7 && other.TryGetComponent(out Bomb bomb))
         {
-            other.GetComponent<Bomb>().CanBeRecup = false;
+            if (!bomb.CanBeRecup) return;
+            bomb.CanBeRecup = false;
             for (int i = 0; i < Bombs.Count; i++)
             {
                 if (Bombs.Peek() == null)
                 {
                     Bombs.Enqueue(other.gameObject);
                     other.gameObject.SetActive(false);
-                    Debug.Log(Bombs.Peek());
+                    IASeekBombState.Check();
                     return;
                 }
             }
@@ -151,6 +152,10 @@ public class IABehaviour : MonoBehaviour
 
     public GameObject GetNearestBomb()
     {
+        if (ObjectPoolBomb.Instance.PoolQueue.Count == 0)
+        {
+            return null;
+        }
         GameObject nearestBomb = ObjectPoolBomb.Instance.PoolQueue.Peek();
 
         foreach (GameObject bomb in ObjectPoolBomb.Instance.PoolQueue)

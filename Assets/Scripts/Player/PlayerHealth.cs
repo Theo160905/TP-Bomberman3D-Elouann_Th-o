@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
@@ -24,9 +26,10 @@ public class PlayerHealth : MonoBehaviour
     public void RemoveHealth()
     {
         if (IsInvulnerable) return;
-        Health = Mathf.Clamp(Health -1 , 0, 3);
+        Health--;
         StartCoroutine(TimeInvulnerable());
         CheckHealth();
+
         _lifeHeartJuice[Health].Juice();
     }
 
@@ -35,6 +38,8 @@ public class PlayerHealth : MonoBehaviour
         if (Health <= 0)
         {
             Debug.Log(gameObject.name + " a perdu");
+            Application.Quit();
+            EditorApplication.isPlaying = false;
         }
     }
 

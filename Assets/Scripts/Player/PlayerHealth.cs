@@ -5,12 +5,16 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField]
-    private int Health = 3;
+    public int Health { get; private set;}
 
     private bool IsInvulnerable = false;
 
     [SerializeField] private List<LifeHeartUI> _lifeHeartJuice;
+
+    private void Awake()
+    {
+        Health = 3;
+    }
 
     public void AddHealth()
     {

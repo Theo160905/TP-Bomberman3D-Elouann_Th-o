@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -6,6 +7,7 @@ public class SpawnerBomb : MonoBehaviour
 {
     private float spawnRadius = 5f;
     public int spawnCount = 0;
+    public List<GameObject> OnMapBombs = new(); 
 
     //Singleton
     #region Singleton
@@ -54,6 +56,9 @@ public class SpawnerBomb : MonoBehaviour
                 GameObject game = ObjectPoolBomb.Instance.GetBomb();
                 game.GetComponent<Bomb>().IsOnMap = true;
                 //game.GetComponent<Bomb>().CanBeRecup = true;
+
+                OnMapBombs.Add(game);
+
                 game.transform.position = randomPosition;
                 spawned = true;
                 spawnCount++;

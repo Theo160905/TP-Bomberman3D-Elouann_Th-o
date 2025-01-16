@@ -1,72 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5382732725264001279
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3562277735249416591}
-  - component: {fileID: 2938506496589694241}
-  - component: {fileID: 3804830289645160578}
-  m_Layer: 0
-  m_Name: BombDetectionRadius
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3562277735249416591
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5382732725264001279}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.911, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7510072558878858366}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &2938506496589694241
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5382732725264001279}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 4.697558
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3804830289645160578
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5382732725264001279}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cf44c8171d30dd45bb9ce2926875dba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DetectedDangerousBombs: []
 --- !u!1 &7898055256820057149
 GameObject:
   m_ObjectHideFlags: 0
@@ -87,7 +20,7 @@ GameObject:
   - component: {fileID: 4764595132347742761}
   m_Layer: 3
   m_Name: IA
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -104,8 +37,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 1.56, z: -3.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3562277735249416591}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8427197476647408315
@@ -122,7 +54,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerTarget: {fileID: 0}
   Agent: {fileID: 5601209651088496714}
-  bombDetector: {fileID: 3804830289645160578}
+  bombDetector: {fileID: 0}
   Detected1: {fileID: 0}
   Detected2: {fileID: 0}
   Detected3: {fileID: 0}
@@ -167,7 +99,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c7e1454d24165b4889a7f49bc6cdb7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 3
+  _lifeHeartJuice:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!195 &5601209651088496714
 NavMeshAgent:
   m_ObjectHideFlags: 0

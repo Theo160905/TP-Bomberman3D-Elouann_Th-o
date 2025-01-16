@@ -21,7 +21,6 @@ public class PlayerUseBomb : MonoBehaviour
             bombList[0] = bombList[1];
             bombList[1] = bombList[2];
             bombList[2] = null;
-            
             return;
         }
     }
@@ -41,6 +40,7 @@ public class PlayerUseBomb : MonoBehaviour
                         other.gameObject.SetActive(false);
                         bomb.IsOnMap = false;
                         bomb.CanBeRecup = false;
+                        bomb.Collider.isTrigger = true;
                         return;
                     }
                 }             

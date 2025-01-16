@@ -80,6 +80,8 @@ public class ObjectPoolBomb : MonoBehaviour
     public void ReturnObject(GameObject obj)
     {
         obj.SetActive(false);
+        obj.TryGetComponent(out Bomb bomb);
+        bomb.Collider.isTrigger = true;
         PoolQueue.Enqueue(obj);
         SpawnerBomb.Instance.OnSpawnBomb();
     }

@@ -49,17 +49,18 @@ public class SpawnerBomb : MonoBehaviour
 
         while (!spawned && attempts < 10 && spawnCount < 5)
         {
-            Vector3 randomPosition = spawnPosition + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0, Random.Range(-spawnRadius, spawnRadius));
+            Vector3 randomPosition = spawnPosition + new Vector3(Random.Range(-spawnRadius, spawnRadius), 1, Random.Range(-spawnRadius, spawnRadius));
             NavMeshHit hit;
             if (NavMesh.SamplePosition(randomPosition, out hit, spawnRadius, NavMesh.AllAreas))
             {
                 GameObject game = ObjectPoolBomb.Instance.GetBomb();
                 game.GetComponent<Bomb>().IsOnMap = true;
                 //game.GetComponent<Bomb>().CanBeRecup = true;
-
+                    
                 OnMapBombs.Add(game);
 
-                game.transform.position = randomPosition;
+                game.transform.position = new Vector3(Mathf.RoundToInt(hit.position.x), hit.position.y + 0.25f, Mathf.RoundToInt(hit.position.z));
+                //game.transform.position = randomPosition;
                 spawned = true;
                 spawnCount++;
             }

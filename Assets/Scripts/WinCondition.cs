@@ -3,9 +3,6 @@ using UnityEngine;
 
 public class WinCondition : MonoBehaviour
 {
-    public int pvJoueur1;
-    public int pvJoueur2;
-
     public GameObject PanelWin;
     public TextMeshProUGUI winnerText;
 
@@ -14,19 +11,19 @@ public class WinCondition : MonoBehaviour
 
     void FixedUpdate()
     {
-        pvJoueur1 = player1.Health;
-        pvJoueur2 = player2.Health;
-        if (pvJoueur1 <= 0)
+        if (player1 == null && player2 == null) return;
+
+        if (player1.Health <= 0)
         {
-            AfficherGagnant("Joueur 2 a gagné !");
+            DisplayWinner("Joueur 2 a gagné !");
         }
-        else if (pvJoueur2 <= 0)
+        else if (player2.Health <= 0)
         {
-            AfficherGagnant("Joueur 1 a gagné !");
+            DisplayWinner("Joueur 1 a gagné !");
         }
     }
 
-    void AfficherGagnant(string message)
+    void DisplayWinner(string message)
     {
         PanelWin.SetActive(true);
         winnerText.text = message;

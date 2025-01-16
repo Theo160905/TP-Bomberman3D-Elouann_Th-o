@@ -10,24 +10,29 @@ public class IASeekBombState : IABaseState
 
     public override void ExitState(IAStateManager iaState)
     {
-    
+
     }
 
     public override void UpdateState(IAStateManager iaState)
     {
         // comportement
-        //iaState.Behaviour.Agent.destination = iaState.Behaviour.GetNearestBomb().transform.position;
+        if (iaState.Behaviour.GetNearestBomb() != null)
+        {
+            iaState.Behaviour.Agent.destination = iaState.Behaviour.GetNearestBomb().transform.position;
+        }
 
         // si conditions validées, change state
 
         #region State Change Conditions
         // Hunt
-        if (iaState.Behaviour.Bombs.Count != 0)
-        {
-            iaState.SwitchState(iaState.IAHuntState);
-        }
+        if (_hasToChange) iaState.SwitchState(iaState.IAHuntState);
 
         // Run
+        if (iaState.Behaviour.DetectGameObjectByLayer(7) != null)
+        {
+            if (!iaState.Behaviour.DetectGameObjectByLayer(7).TryGetComponent(out Bomb bomb)) return;
+            if (!bomb.CanBeRecup) iaState.SwitchState(iaState.IARunState);
+        }
         #endregion
 
         /// si bombe trouvée --> hunt state
@@ -35,27 +40,29 @@ public class IASeekBombState : IABaseState
         /// si vie = 0 --> death state
     }
 
+    private static bool _hasToChange;
     private static bool _firstCheck;
     private static bool _scndCheck;
 
-    public static bool Check()
+    public static void Check()
     {
-        if(!_firstCheck)
+        if (!_firstCheck)
         {
             _firstCheck = true;
-            return (UnityEngine.Random.Range(0, 100) <= 40);
+            _hasToChange = (UnityEngine.Random.Range(0, 100) <= 40);
         }
-        if(!_scndCheck)
+        if (!_scndCheck)
         {
             _scndCheck = true;
-            return (UnityEngine.Random.Range(0, 80) <= 80);
+            _hasToChange = (UnityEngine.Random.Range(0, 80) <= 80);
         }
-        return true;
+        _hasToChange = true;
     }
 
     private void Reset()
     {
         _firstCheck = false;
         _scndCheck = false;
+        _hasToChange = false;
     }
 }

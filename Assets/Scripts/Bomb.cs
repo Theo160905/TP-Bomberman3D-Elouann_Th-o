@@ -11,9 +11,12 @@ public class Bomb : MonoBehaviour
 
     public bool IsOnMap;
 
+    public Collider Collider;
+
     public void Start()
     {
-        CanBeRecup =true; 
+        CanBeRecup = true;
+        //TryGetComponent(out Collider);
     }
 
     public void Update()
@@ -42,20 +45,22 @@ public class Bomb : MonoBehaviour
         for (int i = 1; i < 3; i++)
         {
             RaycastHit hit;
-            Physics.SphereCast(transform.position + new Vector3(0, .5f, 0),0.25f, direction, out hit, i, levelMask);
+            Physics.SphereCast(transform.position + new Vector3(0, .5f, 0), 0.25f, direction, out hit, i, levelMask);
 
             if (!hit.collider)
             {
                 GameObject obj = ObjectPoolExplosion.Instance.GetObject(gameObject);
                 obj.SetActive(true);
-                obj.transform.position = transform.position+ (i*direction);
-            }
-            else
-            {
-                break;
+                obj.transform.position = transform.position + (i * direction);
             }
             yield return new WaitForSeconds(.05f);
         }
         ObjectPoolBomb.Instance.ReturnObject(gameObject);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (!other.CompareTag("Player")) return;
+        Collider.isTrigger = false;
     }
 }

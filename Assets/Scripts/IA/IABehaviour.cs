@@ -28,6 +28,10 @@ public class IABehaviour : MonoBehaviour
     public Queue<GameObject> Bombs { get; private set; } = new();
     private bool _canUseBomb;
 
+    private void Start()
+    {
+        Time.timeScale = 1f;
+    }
     private void Update()
     {
         // TEMPORAIRE
@@ -77,16 +81,11 @@ public class IABehaviour : MonoBehaviour
         {
             if (!bomb.CanBeRecup) return;
             bomb.CanBeRecup = false;
-            for (int i = 0; i < Bombs.Count; i++)
-            {
-                if (Bombs.Peek() == null)
-                {
-                    Bombs.Enqueue(other.gameObject);
-                    other.gameObject.SetActive(false);
-                    IASeekBombState.Check();
-                    return;
-                }
-            }
+            bomb.IsOnMap = false;
+            Bombs.Enqueue(other.gameObject);
+            other.gameObject.SetActive(false);
+            bomb.Collider.isTrigger = true;
+            IASeekBombState.Check();
         }
     }
 
@@ -96,6 +95,7 @@ public class IABehaviour : MonoBehaviour
         if (Bombs.Count > 0)
         {
             if (_canUseBomb) return;
+            SpawnerBomb.Instance.spawnCount--;
             StartCoroutine(Wait());
             GameObject bomb = Bombs.Dequeue();
             bomb.SetActive(true);
@@ -112,12 +112,13 @@ public class IABehaviour : MonoBehaviour
         _canUseBomb = false;
     }
 
-    public GameObject GetDetectedPlayer()
+    #region Geolocation
+    public GameObject DetectGameObjectByLayer(int layer)
     {
         GameObject result = null;
         if (Detected1 != null)
         {
-            if (Detected1.CompareTag("Player"))
+            if (Detected1.layer == layer)
             {
                 result = Detected1;
                 return result;
@@ -125,7 +126,7 @@ public class IABehaviour : MonoBehaviour
         }
         if (Detected2 != null)
         {
-            if (Detected2.CompareTag("Player"))
+            if (Detected2.layer == layer)
             {
                 result = Detected2;
                 return result;
@@ -133,7 +134,7 @@ public class IABehaviour : MonoBehaviour
         }
         if (Detected3 != null)
         {
-            if (Detected3.CompareTag("Player"))
+            if (Detected3.layer == layer)
             {
                 result = Detected3;
                 return result;
@@ -141,7 +142,7 @@ public class IABehaviour : MonoBehaviour
         }
         if (Detected4 != null)
         {
-            if (Detected4.CompareTag("Player"))
+            if (Detected4.layer == layer)
             {
                 result = Detected4;
                 return result;
@@ -152,24 +153,25 @@ public class IABehaviour : MonoBehaviour
 
     public GameObject GetNearestBomb()
     {
-        if (ObjectPoolBomb.Instance.PoolQueue.Count == 0)
+        if (SpawnerBomb.Instance.OnMapBombs.Count == 0)
         {
             return null;
         }
-        GameObject nearestBomb = ObjectPoolBomb.Instance.PoolQueue.Peek();
 
-        foreach (GameObject bomb in ObjectPoolBomb.Instance.PoolQueue)
+        GameObject nearestBomb = SpawnerBomb.Instance.OnMapBombs[0];
+
+        foreach (GameObject bomb in SpawnerBomb.Instance.OnMapBombs)
         {
             if (Vector3.Distance(bomb.transform.position, this.transform.position) < Vector3.Distance(nearestBomb.transform.position, this.transform.position))
             {
-                if (!Agent.CalculatePath(bomb.transform.position, Agent.path)) return nearestBomb;
+                if (!Agent.CalculatePath(bomb.transform.position, Agent.path) | !bomb.activeSelf) return nearestBomb;
                 nearestBomb = bomb;
             }
         }
 
         return nearestBomb;
     }
-
+#endregion
     public void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

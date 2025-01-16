@@ -56,10 +56,11 @@ public class SpawnerBomb : MonoBehaviour
                 GameObject game = ObjectPoolBomb.Instance.GetBomb();
                 game.GetComponent<Bomb>().IsOnMap = true;
                 //game.GetComponent<Bomb>().CanBeRecup = true;
-
+                    
                 OnMapBombs.Add(game);
 
-                game.transform.position = randomPosition;
+                game.transform.position = new Vector3(Mathf.RoundToInt(hit.position.x), hit.position.y + 0.25f, Mathf.RoundToInt(hit.position.z));
+                //game.transform.position = randomPosition;
                 spawned = true;
                 spawnCount++;
             }

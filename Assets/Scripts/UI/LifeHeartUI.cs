@@ -31,12 +31,14 @@ public class LifeHeartUI : MonoBehaviour
     {
         _leftHalfBasePos = _leftHalf.transform.localPosition;
         _rightHalfBasePos = _rightHalf.transform.localPosition;
+        _slash.gameObject.SetActive(false);
     }
 
     public void Juice()
     {
         _leftHalfSequence = DOTween.Sequence();
         _rightHalfSequence = DOTween.Sequence();
+        _slash.gameObject.SetActive(true);
         
         _leftHalf.transform.DOLocalMove(_leftHalfFinalPos, 0.6f).SetEase(Ease.OutQuart);
         _leftHalfSequence.Append(_leftHalf.DOColor(_damagedColor, 0.5f)).Append(_leftHalf.transform.DOLocalRotate(Vector3.forward * 15, 0.7f).SetEase(Ease.InOutCubic)).Insert(0.6f, _leftHalf.transform.DOScale(0.8f, 0.5f).SetEase(Ease.OutBounce));

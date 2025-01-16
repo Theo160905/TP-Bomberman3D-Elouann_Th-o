@@ -49,7 +49,7 @@ public class SpawnerBomb : MonoBehaviour
 
         while (!spawned && attempts < 10 && spawnCount < 5)
         {
-            Vector3 randomPosition = spawnPosition + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0, Random.Range(-spawnRadius, spawnRadius));
+            Vector3 randomPosition = spawnPosition + new Vector3(Random.Range(-spawnRadius, spawnRadius), 1, Random.Range(-spawnRadius, spawnRadius));
             NavMeshHit hit;
             if (NavMesh.SamplePosition(randomPosition, out hit, spawnRadius, NavMesh.AllAreas))
             {

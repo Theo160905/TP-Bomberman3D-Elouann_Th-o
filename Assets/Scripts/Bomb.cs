@@ -21,6 +21,7 @@ public class Bomb : MonoBehaviour
 
     public void Update()
     {
+        this.transform.position = new Vector3(Mathf.RoundToInt(gameObject.transform.position.x), gameObject.transform.position.y/* - 0.5f*/, Mathf.RoundToInt(gameObject.transform.position.z));
         if (IsOnMap)
         {
             CanBeRecup = true;

@@ -28,6 +28,7 @@ public class Bomb : MonoBehaviour
         }
     }
 
+    [ContextMenu("Explode Bomb")]
     public void ExplodeBomb()
     {
         StartCoroutine(CreateExplosion(Vector3.forward));

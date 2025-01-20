@@ -28,19 +28,8 @@ public class PlayerHealth : MonoBehaviour
         if (IsInvulnerable) return;
         Health--;
         StartCoroutine(TimeInvulnerable());
-        CheckHealth();
 
         _lifeHeartJuice[Health].Juice();
-    }
-
-    public void CheckHealth()
-    {
-        if (Health <= 0)
-        {
-            Debug.Log(gameObject.name + " a perdu");
-            Application.Quit();
-            EditorApplication.isPlaying = false;
-        }
     }
 
     public IEnumerator TimeInvulnerable()

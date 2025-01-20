@@ -11,19 +11,21 @@ public class IABehaviour : MonoBehaviour
     public NavMeshAgent Agent;
     public IABombDetectionRadius bombDetector;
 
-    private Ray _sensorRay1;
-    private Ray _sensorRay2;
-    private Ray _sensorRay3;
-    private Ray _sensorRay4;
+    private Ray _sensorRayTop;
+    private Ray _sensorRayBottom;
+    private Ray _sensorRayLeft;
+    private Ray _sensorRayRight;
 
     [Header("Detected objects")]
-    public GameObject Detected1;
-    public GameObject Detected2;
-    public GameObject Detected3;
-    public GameObject Detected4;
+    public GameObject DetectedTop;
+    public GameObject DetectedBottom;
+    public GameObject DetectedLeft;
+    public GameObject DetectedRight;
 
     [Header("Debug")]
     public Color TargetColor;
+    public Color AdditionalTargetColor;
+    public Vector3 AdditionalTarget;
     [field: SerializeField]
     public Queue<GameObject> Bombs { get; private set; } = new();
     private bool _canUseBomb;
@@ -34,43 +36,47 @@ public class IABehaviour : MonoBehaviour
     }
     private void Update()
     {
-        // TEMPORAIRE
-        // Si le navmesh agent atteint sa destination, il se stoppe
-        if (Vector3.Distance(Agent.destination, this.transform.position) <= 1.5f)
-        {
-            if (Agent.isStopped) return;
-        }
+        //// TEMPORAIRE
+        //// Si le navmesh agent atteint sa destination, il se stoppe
+        //if (Vector3.Distance(Agent.destination, this.transform.position) <= 1.5f)
+        //{
+        //    if (Agent.isStopped) return;
+        //}
+
+        print("Current amount of bombs : " + Bombs.Count);
     }
 
     private void FixedUpdate()
     {
-        _sensorRay1 = new Ray(this.transform.position, Vector3.forward * 3);
-        _sensorRay2 = new Ray(this.transform.position, -Vector3.forward * 3);
-        _sensorRay3 = new Ray(this.transform.position, -Vector3.right * 3);
-        _sensorRay4 = new Ray(this.transform.position, Vector3.right * 3);
+        if (Vector3.Distance(this.transform.position, PlayerTarget.transform.position) > 4) return;
 
-        if (Physics.SphereCast(_sensorRay1, 0.3f, out RaycastHit hit1))
+        _sensorRayTop = new Ray(this.transform.position, Vector3.forward * 3);
+        _sensorRayBottom = new Ray(this.transform.position, -Vector3.forward * 3);
+        _sensorRayLeft = new Ray(this.transform.position, -Vector3.right * 3);
+        _sensorRayRight = new Ray(this.transform.position, Vector3.right * 3);
+
+        if (Physics.SphereCast(_sensorRayTop, 0.3f, out RaycastHit hit1))
         {
-            Detected1 = hit1.collider.gameObject;
-            if (Vector3.Distance(Detected1.transform.position, this.gameObject.transform.position) > 5.5f) return;
+            DetectedTop = hit1.collider.gameObject;
+            if (Vector3.Distance(DetectedTop.transform.position, this.gameObject.transform.position) > 5.5f) return;
         }
 
-        if (Physics.SphereCast(_sensorRay2, 0.3f, out RaycastHit hit2))
+        if (Physics.SphereCast(_sensorRayBottom, 0.3f, out RaycastHit hit2))
         {
-            Detected2 = hit2.collider.gameObject;
-            if (Vector3.Distance(Detected2.transform.position, this.gameObject.transform.position) > 5.5f) return;
+            DetectedBottom = hit2.collider.gameObject;
+            if (Vector3.Distance(DetectedBottom.transform.position, this.gameObject.transform.position) > 5.5f) return;
         }
 
-        if (Physics.SphereCast(_sensorRay3, 0.3f, out RaycastHit hit3))
+        if (Physics.SphereCast(_sensorRayLeft, 0.3f, out RaycastHit hit3))
         {
-            Detected3 = hit3.collider.gameObject;
-            if (Vector3.Distance(Detected3.transform.position, this.gameObject.transform.position) > 5.5f) return;
+            DetectedLeft = hit3.collider.gameObject;
+            if (Vector3.Distance(DetectedLeft.transform.position, this.gameObject.transform.position) > 5.5f) return;
         }
 
-        if (Physics.SphereCast(_sensorRay4, 0.3f, out RaycastHit hit4))
+        if (Physics.SphereCast(_sensorRayRight, 0.3f, out RaycastHit hit4))
         {
-            Detected4 = hit4.collider.gameObject;
-            if (Vector3.Distance(Detected3.transform.position, this.gameObject.transform.position) > 5.5f) return;
+            DetectedRight = hit4.collider.gameObject;
+            if (Vector3.Distance(DetectedLeft.transform.position, this.gameObject.transform.position) > 5.5f) return;
         }
     }
 
@@ -100,7 +106,8 @@ public class IABehaviour : MonoBehaviour
             GameObject bomb = Bombs.Dequeue();
             bomb.SetActive(true);
             bomb.transform.position = new Vector3(Mathf.RoundToInt(gameObject.transform.position.x), gameObject.transform.position.y - 0.5f, Mathf.RoundToInt(gameObject.transform.position.z));
-            bomb.gameObject.GetComponent<Bomb>().ExplodeBomb();
+            bomb.gameObject.TryGetComponent(out Bomb bombScript);
+            bombScript.ExplodeBomb();
             return;
         }
     }
@@ -116,35 +123,35 @@ public class IABehaviour : MonoBehaviour
     public GameObject DetectGameObjectByLayer(int layer)
     {
         GameObject result = null;
-        if (Detected1 != null)
+        if (DetectedTop != null)
         {
-            if (Detected1.layer == layer)
+            if (DetectedTop.layer == layer)
             {
-                result = Detected1;
+                result = DetectedTop;
                 return result;
             }
         }
-        if (Detected2 != null)
+        if (DetectedBottom != null)
         {
-            if (Detected2.layer == layer)
+            if (DetectedBottom.layer == layer)
             {
-                result = Detected2;
+                result = DetectedBottom;
                 return result;
             }
         }
-        if (Detected3 != null)
+        if (DetectedLeft != null)
         {
-            if (Detected3.layer == layer)
+            if (DetectedLeft.layer == layer)
             {
-                result = Detected3;
+                result = DetectedLeft;
                 return result;
             }
         }
-        if (Detected4 != null)
+        if (DetectedRight != null)
         {
-            if (Detected4.layer == layer)
+            if (DetectedRight.layer == layer)
             {
-                result = Detected4;
+                result = DetectedRight;
                 return result;
             }
         }
@@ -169,17 +176,20 @@ public class IABehaviour : MonoBehaviour
             }
         }
 
+        //print($"Nearest bomb : {nearestBomb}, {nearestBomb.transform.position}");
         return nearestBomb;
     }
 #endregion
     public void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(_sensorRay1);
-        Gizmos.DrawRay(_sensorRay2);
-        Gizmos.DrawRay(_sensorRay3);
-        Gizmos.DrawRay(_sensorRay4);
+        Gizmos.DrawRay(_sensorRayTop);
+        Gizmos.DrawRay(_sensorRayBottom);
+        Gizmos.DrawRay(_sensorRayLeft);
+        Gizmos.DrawRay(_sensorRayRight);
         Gizmos.color = TargetColor;
         Gizmos.DrawSphere(Agent.destination, 0.5f);
+        Gizmos.color = AdditionalTargetColor;
+        Gizmos.DrawSphere(AdditionalTarget, 0.5f);
     }
 }

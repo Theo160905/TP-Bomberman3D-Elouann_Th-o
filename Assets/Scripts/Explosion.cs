@@ -10,7 +10,9 @@ public class Explosion : MonoBehaviour
 
     private IEnumerator TimeExplosion()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
+        gameObject.GetComponent<BoxCollider>().enabled = false;
+        yield return new WaitForSeconds(1.5f);
         gameObject.SetActive(false);
     }
         

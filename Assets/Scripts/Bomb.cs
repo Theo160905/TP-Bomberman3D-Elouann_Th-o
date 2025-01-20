@@ -97,7 +97,7 @@ public class Bomb : MonoBehaviour
         ObjectPoolBomb.Instance.ReturnObject(gameObject);
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
         Collider.isTrigger = false;

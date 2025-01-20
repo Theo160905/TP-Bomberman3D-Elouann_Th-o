@@ -11,11 +11,9 @@ public class Oui
     public void OuiSimplePasses()
     {
         // -- Arrange --
-        int spawnCount = SpawnerBomb.Instance.spawnCount;
-        List<GameObject> bombsList = SpawnerBomb.Instance.OnMapBombs;
 
         // -- Act --
-        
+
 
         // -- Assert --
     }
@@ -26,8 +24,18 @@ public class Oui
     public IEnumerator OuiWithEnumeratorPasses()
     {
         // -- Arrange --
+        GameObject chrono = new GameObject();
+        GameChrono gameChrono = chrono.AddComponent<GameChrono>();
+
+
+        float oldTime = gameChrono.Timer;
+        float timeToWait = 2;
+
         // -- Act --
+
+        yield return new WaitForSeconds(timeToWait);
+
         // -- Assert --
-        yield return null;
+        Assert.That(gameChrono.Timer, Is.EqualTo(oldTime + timeToWait));
     }
 }

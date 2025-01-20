@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting.FullSerializer;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class IARunState : IABaseState
@@ -16,15 +16,16 @@ public class IARunState : IABaseState
 
     public override void UpdateState(IAStateManager iaState)
     {
-        // comportement
+        // behaviour
         Vector3 centerOfMass;
         float xSum = 0;
         float zSum = 0;
 
-        if (iaState.Behaviour.bombDetector.DetectedDangerousBombs.Count <= 0)
+        if (iaState.Behaviour.bombDetector.DetectedDangerousBombs.Count > 0)
         {
             for (int i = 0; i < iaState.Behaviour.bombDetector.DetectedDangerousBombs.Count; i++)
             {
+                Debug.Log(iaState.Behaviour.bombDetector.DetectedDangerousBombs[i].name);
                 xSum += iaState.Behaviour.bombDetector.DetectedDangerousBombs[i].transform.position.x;
                 zSum += iaState.Behaviour.bombDetector.DetectedDangerousBombs[i].transform.position.z;
             }
@@ -33,25 +34,28 @@ public class IARunState : IABaseState
             zSum /= iaState.Behaviour.bombDetector.DetectedDangerousBombs.Count;
 
             centerOfMass = new Vector3(xSum, 0, zSum);
+            iaState.Behaviour.AdditionalTarget = centerOfMass;
 
-            iaState.Behaviour.Agent.SetDestination(-(centerOfMass.normalized - iaState.transform.position.normalized) * 6);
-            // si conditions validées, change state
+            Vector3 oppositeDir = -(centerOfMass.normalized - iaState.transform.position.normalized) * 6;
+
+            Vector3 target = (Vector3.Distance(oppositeDir, iaState.Behaviour.transform.position) > 3) ? oppositeDir : centerOfMass - iaState.transform.position;
+
+            //iaState.Behaviour.Agent.SetDestination(-(centerOfMass.normalized - iaState.transform.position.normalized) * 6);
         }
 
-        /// si en sécurité, sans bombe -->  seek bomb state
-        if (iaState.Behaviour.DetectGameObjectByLayer(7) == null)
+        // Transitions
+        if (iaState.Behaviour.bombDetector.DetectedDangerousBombs.Count <= 0)
         {
-            Debug.Log("SECURITE");
             if(iaState.Behaviour.Bombs.Count > 0)
             {
+                // To Hunt state
                 iaState.SwitchState(iaState.IAHuntState);
             }
             else
             {
+                // To Seek Bomb state
                 iaState.SwitchState(iaState.IASeekBombState);
             }
         }
-        /// si en sécurité, avec bombe -->  hunt state
-        /// si vie = 0 --> death state
     }
 }

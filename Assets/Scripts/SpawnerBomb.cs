@@ -7,7 +7,7 @@ public class SpawnerBomb : MonoBehaviour
 {
     private float spawnRadius = 5f;
     public int spawnCount = 0;
-    public List<GameObject> OnMapBombs = new(); 
+    public List<GameObject> OnMapBombs = new();
 
     //Singleton
     #region Singleton
@@ -55,9 +55,12 @@ public class SpawnerBomb : MonoBehaviour
             {
                 GameObject game = ObjectPoolBomb.Instance.GetBomb();
                 game.GetComponent<Bomb>().IsOnMap = true;
+                game.GetComponent<Bomb>().Obstacle.enabled = false;
+                game.GetComponent<Bomb>().VerticalNavMeshModifier.SetActive(false);
+                game.GetComponent<Bomb>().HorizontalNavMeshModifier.SetActive(false);
                 //game.GetComponent<Bomb>().CanBeRecup = true;
-                    
-                OnMapBombs.Add(game);
+
+                if (!OnMapBombs.Contains(game)) OnMapBombs.Add(game);
 
                 game.transform.position = new Vector3(Mathf.RoundToInt(hit.position.x), hit.position.y + 0.25f, Mathf.RoundToInt(hit.position.z));
                 //game.transform.position = randomPosition;

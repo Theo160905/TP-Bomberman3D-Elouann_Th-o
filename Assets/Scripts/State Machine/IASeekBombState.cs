@@ -28,10 +28,9 @@ public class IASeekBombState : IABaseState
         if (_hasToChange) iaState.SwitchState(iaState.IAHuntState);
 
         // Run
-        if (iaState.Behaviour.DetectGameObjectByLayer(7) != null)
+        if (iaState.Behaviour.bombDetector.DetectedDangerousBombs.Count > 0)
         {
-            if (!iaState.Behaviour.DetectGameObjectByLayer(7).TryGetComponent(out Bomb bomb)) return;
-            if (!bomb.CanBeRecup) iaState.SwitchState(iaState.IARunState);
+            iaState.SwitchState(iaState.IARunState);
         }
         #endregion
 

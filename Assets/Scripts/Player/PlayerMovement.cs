@@ -34,6 +34,8 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 moveInput = _moveInput.ReadValue<Vector2>();
 
+        if (moveInput.x == moveInput.y && moveInput != Vector2.zero) return;
+
         float targetSpeedX = moveInput.x * _walkTopSpeed;
         float targetSpeedZ = moveInput.y * _walkTopSpeed;
 

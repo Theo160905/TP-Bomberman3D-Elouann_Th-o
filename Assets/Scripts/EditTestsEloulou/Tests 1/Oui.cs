@@ -27,7 +27,6 @@ public class Oui
         GameObject chrono = new GameObject();
         GameChrono gameChrono = chrono.AddComponent<GameChrono>();
 
-
         float oldTime = gameChrono.Timer;
         float timeToWait = 2;
 

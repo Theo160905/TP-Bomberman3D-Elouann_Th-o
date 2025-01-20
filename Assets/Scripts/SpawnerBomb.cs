@@ -54,11 +54,8 @@ public class SpawnerBomb : MonoBehaviour
             if (NavMesh.SamplePosition(randomPosition, out hit, spawnRadius, NavMesh.AllAreas))
             {
                 GameObject game = ObjectPoolBomb.Instance.GetBomb();
-                game.GetComponent<Bomb>().IsOnMap = true;
-                game.GetComponent<Bomb>().Obstacle.enabled = false;
-                game.GetComponent<Bomb>().VerticalNavMeshModifier.SetActive(false);
-                game.GetComponent<Bomb>().HorizontalNavMeshModifier.SetActive(false);
-                //game.GetComponent<Bomb>().CanBeRecup = true;
+                game.TryGetComponent(out Bomb bomb);
+                bomb.Reset();
 
                 if (!OnMapBombs.Contains(game)) OnMapBombs.Add(game);
 

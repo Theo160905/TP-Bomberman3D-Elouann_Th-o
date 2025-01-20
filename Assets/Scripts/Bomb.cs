@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -16,7 +17,10 @@ public class Bomb : MonoBehaviour
 
     public GameObject VerticalNavMeshModifier;
     public GameObject HorizontalNavMeshModifier;
-    public NavMeshObstacle Obstacle; 
+    public NavMeshObstacle Obstacle;
+
+    public event Action OnSpawn;
+    public event Action OnStartExplode;
 
     public void Start()
     {
@@ -41,6 +45,16 @@ public class Bomb : MonoBehaviour
         StartCoroutine(CreateExplosion(Vector3.back));
         StartCoroutine(CreateExplosion(Vector3.right));
         StartCoroutine(CreateExplosion(Vector3.left));
+        OnStartExplode?.Invoke();
+    }
+
+    public void Reset()
+    {
+        IsOnMap = true;
+        Obstacle.enabled = false;
+        VerticalNavMeshModifier.SetActive(false);
+        HorizontalNavMeshModifier.SetActive(false);
+        OnSpawn?.Invoke();
     }
 
     private void Initialize()
@@ -97,7 +111,7 @@ public class Bomb : MonoBehaviour
         ObjectPoolBomb.Instance.ReturnObject(gameObject);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         if (!other.CompareTag("Player")) return;
         Collider.isTrigger = false;

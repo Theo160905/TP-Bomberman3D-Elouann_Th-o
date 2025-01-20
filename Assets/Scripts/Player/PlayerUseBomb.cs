@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerUseBomb : MonoBehaviour
 {
+    public BombUI _bombUI;
+
     private GameObject[] bombList = new GameObject[3];
     private bool usebomb = false;
 
@@ -15,6 +17,7 @@ public class PlayerUseBomb : MonoBehaviour
             SpawnerBomb.Instance.spawnCount--;
             StartCoroutine(Wait());
             bombList[0].gameObject.SetActive(true);
+            _bombUI.OnDropJuice(bombList.Length - 1);
             //bombList[0].transform.position = gameObject.transform.position;
             bombList[0].transform.position = new Vector3(Mathf.RoundToInt(gameObject.transform.position.x), gameObject.transform.position.y - 0.5f, Mathf.RoundToInt(gameObject.transform.position.z));
             bombList[0].gameObject.GetComponent<Bomb>().ExplodeBomb();
@@ -41,6 +44,7 @@ public class PlayerUseBomb : MonoBehaviour
                         bomb.IsOnMap = false;
                         bomb.CanBeRecup = false;
                         bomb.Collider.isTrigger = true;
+                        _bombUI.OnPickUpJuice(bombList.Length);
                         return;
                     }
                 }             

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class IABehaviour : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class IABehaviour : MonoBehaviour
     public GameObject PlayerTarget;
     public NavMeshAgent Agent;
     public IABombDetectionRadius bombDetector;
+
+    [Header("UI")]
+    public BombUI _bombUI;
 
     private Ray _sensorRayTop;
     private Ray _sensorRayBottom;
@@ -92,6 +96,7 @@ public class IABehaviour : MonoBehaviour
             other.gameObject.SetActive(false);
             bomb.Collider.isTrigger = true;
             IASeekBombState.Check();
+            _bombUI.OnPickUpJuice(Bombs.Count);
         }
     }
 
@@ -108,6 +113,7 @@ public class IABehaviour : MonoBehaviour
             bomb.transform.position = new Vector3(Mathf.RoundToInt(gameObject.transform.position.x), gameObject.transform.position.y - 0.5f, Mathf.RoundToInt(gameObject.transform.position.z));
             bomb.gameObject.TryGetComponent(out Bomb bombScript);
             bombScript.ExplodeBomb();
+            _bombUI.OnDropJuice(Bombs.Count - 1);
             return;
         }
     }

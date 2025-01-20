@@ -8,6 +8,7 @@ public class ChangeGameObjectWindow : EditorWindow
 
     private GameObject[] selectedGameObjects;
 
+    private string objectName;
     private Vector3 objectPosition;
     private Vector3 objectScale;
     private Color color;
@@ -33,6 +34,8 @@ public class ChangeGameObjectWindow : EditorWindow
 
             EditorGUILayout.LabelField("Modify selected GameObjects", EditorStyles.boldLabel);
 
+            objectName = EditorGUILayout.TextField("Name", objectName);
+
             GUIContent position = new GUIContent("Position", "Here we add the following values to the position of the selected GameObject");
             objectPosition = EditorGUILayout.Vector3Field(position, objectPosition);
 
@@ -49,6 +52,7 @@ public class ChangeGameObjectWindow : EditorWindow
                     if (gameObject != null)
                     {
                         Undo.RecordObject(gameObject.transform, "Modify GameObject Properties");
+                        gameObject.name = objectName;
                         gameObject.transform.position += objectPosition;
                         gameObject.transform.localScale += objectScale;
 
@@ -80,7 +84,6 @@ public class ChangeGameObjectWindow : EditorWindow
 
         if (selectedGameObjects != null && selectedGameObjects.Length > 0)
         {
-            // Initialize values based on the first selected GameObject
             GameObject firstSelected = selectedGameObjects[0];
             objectPosition = firstSelected.transform.position;
             objectScale = firstSelected.transform.localScale;

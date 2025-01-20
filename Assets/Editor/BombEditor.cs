@@ -10,7 +10,7 @@ public class BombEditor : Editor
 
         Bomb bomb = (Bomb)target;
 
-        if (GUILayout.Button("Explode Bomb"))
+        if (GUILayout.Button("Turn On Bomb"))
         {
             bomb.ExplodeBomb();
         }

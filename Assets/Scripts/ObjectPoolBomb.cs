@@ -52,6 +52,8 @@ public class ObjectPoolBomb : MonoBehaviour
             obj.name = objectPrefab.name + i.ToString();
             obj.transform.position -= Vector3.forward * (1f * i);
             obj.SetActive(false);
+            obj.TryGetComponent(out Bomb bomb);
+            bomb.OnExplode += ScreenJuice.Instance.BigScreenShake;
             PoolQueue.Enqueue(obj);
         }
 
@@ -59,6 +61,11 @@ public class ObjectPoolBomb : MonoBehaviour
         {
             SpawnerBomb.Instance.OnSpawnBomb();
         }
+    }
+
+    private void Bomb_OnExplode()
+    {
+        throw new System.NotImplementedException();
     }
 
     public GameObject GetBomb()

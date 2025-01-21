@@ -185,7 +185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4593184484909914552, guid: 5f7fe6e5e34ba1c4e990cdffa38ac2a9, type: 3}
       propertyPath: m_Name
-      value: CFXR2 WW Explosion
+      value: VFX
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

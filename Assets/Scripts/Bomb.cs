@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Threading.Tasks;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -13,6 +15,11 @@ public class Bomb : MonoBehaviour
 
     public bool IsOnMap;
 
+    public MeshRenderer MeshRenderer;
+
+    [SerializeField] private Color _baseColor;
+    [SerializeField] private Color _litColor;
+
     public Collider Collider;
 
     public GameObject VerticalNavMeshModifier;
@@ -21,11 +28,11 @@ public class Bomb : MonoBehaviour
 
     public event Action OnSpawn;
     public event Action OnStartExplode;
+    public event Action OnExplode;
 
     public void Start()
     {
         CanBeRecup = true;
-        //TryGetComponent(out Collider);
     }
 
     public void Update()
@@ -38,7 +45,7 @@ public class Bomb : MonoBehaviour
     }
 
     [ContextMenu("Explode Bomb")]
-    public void ExplodeBomb()
+    public async void ExplodeBomb()
     {
         Initialize();
         StartCoroutine(CreateExplosion(Vector3.forward));
@@ -46,10 +53,13 @@ public class Bomb : MonoBehaviour
         StartCoroutine(CreateExplosion(Vector3.right));
         StartCoroutine(CreateExplosion(Vector3.left));
         OnStartExplode?.Invoke();
+        await Task.Delay(3000);
+        OnExplode?.Invoke();
     }
 
     public void Reset()
     {
+        MeshRenderer.material.color = _baseColor;
         IsOnMap = true;
         Obstacle.enabled = false;
         VerticalNavMeshModifier.SetActive(false);
@@ -59,7 +69,9 @@ public class Bomb : MonoBehaviour
 
     private void Initialize()
     {
+        StartCoroutine(VisualTimer());
         Obstacle.enabled = true;
+        Collider.isTrigger = false;
 
         HorizontalNavMeshModifier.SetActive(true);
         HorizontalNavMeshModifier.TryGetComponent(out NavMeshObstacle horizObstacle);
@@ -91,6 +103,7 @@ public class Bomb : MonoBehaviour
     public IEnumerator CreateExplosion(Vector3 direction)
     {
         yield return new WaitForSeconds(3f);
+        StopCoroutine(VisualTimer());
         GameObject game = ObjectPoolExplosion.Instance.GetObject(gameObject);
         game.SetActive(true);
         game.transform.position = transform.position;
@@ -109,6 +122,17 @@ public class Bomb : MonoBehaviour
             yield return new WaitForSeconds(.05f);
         }
         ObjectPoolBomb.Instance.ReturnObject(gameObject);
+    }
+
+    private IEnumerator VisualTimer()
+    {
+        while (true)
+        {
+            MeshRenderer.material.DOColor(_litColor, 0.2f);
+            yield return new WaitForSeconds(0.2f);
+            MeshRenderer.material.DOColor(_baseColor, 0.2f);
+            yield return new WaitForSeconds(0.2f);
+        }
     }
 
     private void OnTriggerExit(Collider other)

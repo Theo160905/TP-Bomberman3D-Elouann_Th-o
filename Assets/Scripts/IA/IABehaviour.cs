@@ -96,7 +96,7 @@ public class IABehaviour : MonoBehaviour
             other.gameObject.SetActive(false);
             bomb.Collider.isTrigger = true;
             IASeekBombState.Check();
-            _bombUI.OnPickUpJuice(Bombs.Count);
+            _bombUI.OnPickUpJuice(Bombs.Count - 1);
         }
     }
 
@@ -113,7 +113,7 @@ public class IABehaviour : MonoBehaviour
             bomb.transform.position = new Vector3(Mathf.RoundToInt(gameObject.transform.position.x), gameObject.transform.position.y - 0.5f, Mathf.RoundToInt(gameObject.transform.position.z));
             bomb.gameObject.TryGetComponent(out Bomb bombScript);
             bombScript.ExplodeBomb();
-            _bombUI.OnDropJuice(Bombs.Count - 1);
+            _bombUI.OnDropJuice(Bombs.Count);
             return;
         }
     }

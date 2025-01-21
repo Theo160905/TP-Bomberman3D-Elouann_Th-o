@@ -24,14 +24,14 @@ public class IASeekBombState : IABaseState
         // si conditions validées, change state
 
         #region State Change Conditions
-        // Hunt
-        if (_hasToChange) iaState.SwitchState(iaState.IAHuntState);
-
         // Run
         if (iaState.Behaviour.bombDetector.DetectedDangerousBombs.Count > 0)
         {
             iaState.SwitchState(iaState.IARunState);
         }
+
+        // Hunt
+        if (_hasToChange) iaState.SwitchState(iaState.IAHuntState);
         #endregion
 
         /// si bombe trouvée --> hunt state

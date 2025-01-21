@@ -46,8 +46,6 @@ public class IABehaviour : MonoBehaviour
         //{
         //    if (Agent.isStopped) return;
         //}
-
-        print("Current amount of bombs : " + Bombs.Count);
     }
 
     private void FixedUpdate()

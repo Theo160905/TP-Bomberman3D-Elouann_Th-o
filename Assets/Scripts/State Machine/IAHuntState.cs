@@ -34,7 +34,6 @@ public class IAHuntState : IABaseState
         iaState.Behaviour.Agent.destination = targetPos;
 
         if (iaState.Behaviour.DetectGameObjectByLayer(3) == null) return;
-        Debug.Log("hunt check");
         if (Vector3.Distance(iaState.Behaviour.DetectGameObjectByLayer(3).transform.position, iaState.transform.position) <= 4)
         {
             iaState.Behaviour.UseBomb();

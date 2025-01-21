@@ -59,7 +59,7 @@ public class ChangeGameObjectWindow : EditorWindow
                         Renderer renderer = gameObject.GetComponent<Renderer>();
                         if (renderer != null)
                         {
-                            renderer.material.color = color;
+                            renderer.sharedMaterial.color = color;
                         }
 
                         EditorUtility.SetDirty(gameObject);
@@ -90,7 +90,7 @@ public class ChangeGameObjectWindow : EditorWindow
             Renderer renderer = firstSelected.GetComponent<Renderer>();
             if (renderer != null)
             {
-                color = renderer.material.color;
+                color = renderer.sharedMaterial.color;
             }
         }
     }

@@ -26,6 +26,8 @@ public class Bomb : MonoBehaviour
     public GameObject HorizontalNavMeshModifier;
     public NavMeshObstacle Obstacle;
 
+    public GameObject Smoke_VFX;
+
     public event Action OnSpawn;
     public event Action OnStartExplode;
     public event Action OnExplode;
@@ -47,6 +49,7 @@ public class Bomb : MonoBehaviour
     [ContextMenu("Explode Bomb")]
     public async void ExplodeBomb()
     {
+        Smoke_VFX.SetActive(true);
         Initialize();
         StartCoroutine(CreateExplosion(Vector3.forward));
         StartCoroutine(CreateExplosion(Vector3.back));
@@ -103,6 +106,7 @@ public class Bomb : MonoBehaviour
     public IEnumerator CreateExplosion(Vector3 direction)
     {
         yield return new WaitForSeconds(3f);
+        Smoke_VFX.SetActive(false);
         StopCoroutine(VisualTimer());
         GameObject game = ObjectPoolExplosion.Instance.GetObject(gameObject);
         game.SetActive(true);

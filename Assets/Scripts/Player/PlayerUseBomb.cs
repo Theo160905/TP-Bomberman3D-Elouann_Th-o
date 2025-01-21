@@ -44,7 +44,7 @@ public class PlayerUseBomb : MonoBehaviour
                         bomb.IsOnMap = false;
                         bomb.CanBeRecup = false;
                         bomb.Collider.isTrigger = true;
-                        _bombUI.OnPickUpJuice(bombList.Length);
+                        _bombUI.OnPickUpJuice(bombList.Length - 1);
                         return;
                     }
                 }             

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class IARunState : IABaseState
 {
@@ -25,7 +26,6 @@ public class IARunState : IABaseState
         {
             for (int i = 0; i < iaState.Behaviour.bombDetector.DetectedDangerousBombs.Count; i++)
             {
-                Debug.Log(iaState.Behaviour.bombDetector.DetectedDangerousBombs[i].name);
                 xSum += iaState.Behaviour.bombDetector.DetectedDangerousBombs[i].transform.position.x;
                 zSum += iaState.Behaviour.bombDetector.DetectedDangerousBombs[i].transform.position.z;
             }
@@ -36,11 +36,15 @@ public class IARunState : IABaseState
             centerOfMass = new Vector3(xSum, 0, zSum);
             iaState.Behaviour.AdditionalTarget = centerOfMass;
 
-            Vector3 oppositeDir = -(centerOfMass.normalized - iaState.transform.position.normalized) * 6;
+            Vector3 oppositeDir = -(centerOfMass.normalized - iaState.transform.position.normalized) * 5;
 
             Vector3 target = (Vector3.Distance(oppositeDir, iaState.Behaviour.transform.position) > 3) ? oppositeDir : centerOfMass - iaState.transform.position;
 
-            //iaState.Behaviour.Agent.SetDestination(-(centerOfMass.normalized - iaState.transform.position.normalized) * 6);
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(oppositeDir, out hit, 0.5f, NavMesh.AllAreas))
+            {
+                iaState.Behaviour.Agent.SetDestination(oppositeDir);
+            }
         }
 
         // Transitions

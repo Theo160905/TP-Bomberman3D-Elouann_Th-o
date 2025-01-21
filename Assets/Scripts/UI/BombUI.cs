@@ -11,7 +11,7 @@ public class BombUI : MonoBehaviour
 
     public void OnPickUpJuice(int index)
     {
-        _imageList[index - 1].DOColor(Color.white, 0.1f);
+        _imageList[index].DOColor(Color.white, 0.1f);
     }
 
     public void OnDropJuice(int index)

@@ -9,7 +9,10 @@ public class WinCondition : MonoBehaviour
     public PlayerHealth player1;
     public PlayerHealth player2;
 
+    public GameChrono chrono;
     public GameObject WinObject;
+
+    public AudioClip clip;
 
     void FixedUpdate()
     {
@@ -18,11 +21,12 @@ public class WinCondition : MonoBehaviour
         if (player1.Health <= 0)
         {
             DisplayWinner("Joueur 2 a gagné !");
+            chrono.enabled = false;
         }
         else if (player2.Health <= 0)
         {
             DisplayWinner("Joueur 1 a gagné !");
-            player2.gameObject.SetActive(false);
+            chrono.enabled = false;
         }
     }
 

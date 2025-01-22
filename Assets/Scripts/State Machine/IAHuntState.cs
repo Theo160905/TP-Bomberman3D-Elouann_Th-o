@@ -28,6 +28,7 @@ public class IAHuntState : IABaseState
             iaState.SwitchState(iaState.IASeekBombState);
         }
         #endregion
+        if (iaState.Behaviour.PlayerTarget == null) return;
 
         // comportement
         Vector3 targetPos = new Vector3(iaState.Behaviour.PlayerTarget.transform.position.x, iaState.transform.position.y, iaState.Behaviour.PlayerTarget.transform.position.z);

@@ -34,12 +34,10 @@ public class GameChrono : MonoBehaviour
         if (_instance != null)
         {
             Destroy(this.gameObject);
-            Debug.Log($"<b><color=#{UnityEngine.Random.ColorHSV(0f, 1f, 1f, 1f, 0f, 0f, 1f, 1f).ToHexString()}>{this.GetType()}</color> instance <color=#eb624d>destroyed</color></b>");
         }
         else
         {
             _instance = this;
-            Debug.Log($"<b><color=#{UnityEngine.Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f, 1f, 1f).ToHexString()}>{this.GetType()}</color> instance <color=#58ed7d>created</color></b>");
         }
     }
     #endregion

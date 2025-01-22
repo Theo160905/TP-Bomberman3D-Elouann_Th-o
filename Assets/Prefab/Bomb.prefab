@@ -436,6 +436,7 @@ MonoBehaviour:
   HorizontalNavMeshModifier: {fileID: 4886624454867582047}
   Obstacle: {fileID: 3252656129131338206}
   Smoke_VFX: {fileID: 5791324232119420963}
+  clip: {fileID: 8300000, guid: b5c486faa00687143841f64147d42731, type: 3}
 --- !u!208 &3252656129131338206
 NavMeshObstacle:
   m_ObjectHideFlags: 0

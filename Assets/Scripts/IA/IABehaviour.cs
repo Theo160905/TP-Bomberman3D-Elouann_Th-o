@@ -51,6 +51,7 @@ public class IABehaviour : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (PlayerTarget == null) return;
         if (Vector3.Distance(this.transform.position, PlayerTarget.transform.position) > 4) return;
 
         _sensorRayTop = new Ray(this.transform.position, Vector3.forward * 3);

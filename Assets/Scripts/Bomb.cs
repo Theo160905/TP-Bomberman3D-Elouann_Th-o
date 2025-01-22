@@ -27,6 +27,7 @@ public class Bomb : MonoBehaviour
     public NavMeshObstacle Obstacle;
 
     public GameObject Smoke_VFX;
+    public AudioClip clip;
 
     public event Action OnSpawn;
     public event Action OnStartExplode;
@@ -57,6 +58,7 @@ public class Bomb : MonoBehaviour
         StartCoroutine(CreateExplosion(Vector3.left));
         OnStartExplode?.Invoke();
         await Task.Delay(3000);
+        SoundManager.Instance.PlaySound(clip);
         OnExplode?.Invoke();
     }
 

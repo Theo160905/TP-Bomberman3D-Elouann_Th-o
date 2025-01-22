@@ -1,40 +1,50 @@
+using System;
+using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class OnStartGame : MonoBehaviour
 {
-    public int PlayerCount;
+    public TextMeshProUGUI textTimeToStart;
+    public AudioClip audioClip;
+    public WinCondition condition;
+    public GameChrono chrono;
 
-    public GameObject prefabIA;
+    public GameObject Player1;
+    public GameObject Player2;
 
-    [SerializeField]
-    private Transform SpawnPointA;
+    private int time = 4;
 
-    [SerializeField]
-    private Transform SpawnPointB;
-
-    public void OnPlayerJoined(PlayerInput input)
+    public void Onstart()
     {
-        PlayerCount++;
-
-        var index = input.playerIndex;
-        if (index == 0)
-        {
-            Debug.Log("Player 1 joined");
-            input.gameObject.transform.position = SpawnPointA.position;
-        }
-        else if (index == 1)
-        {
-            Debug.Log("Player 2 Joined");
-            input.gameObject.transform.position = SpawnPointB.position;
-        }
+        SoundManager.Instance.PlaySound(audioClip);
+        StartCoroutine(TimerToStartGame());
     }
 
-    public void OnStart()
+    public IEnumerator TimerToStartGame()
     {
-        if (PlayerCount == 1)
+        for (int i = 0; i < 4 ; i++)
         {
-            prefabIA.SetActive(true);
+            time--;
+            textTimeToStart.gameObject.SetActive(true);
+            if (time > 0)
+            {
+                textTimeToStart.text = time.ToString() ;
+                yield return new WaitForSeconds(1f);
+            }
+            else if (time == 0)
+            {
+                textTimeToStart.text = "GO !";
+                yield return new WaitForSeconds(1f);
+            }
+
         }
+        textTimeToStart.gameObject.SetActive(false);
+        Player1.SetActive(true);
+        Player2.SetActive(true);
+        condition.enabled = true;
+        chrono.enabled = true;
     }
+
 }

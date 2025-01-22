@@ -11,6 +11,7 @@ public class IABombDetectionRadius : MonoBehaviour
 
     private void Update()
     {
+        if (Target == null) return; 
         this.transform.position = Target.position;
         foreach (GameObject bomb in _bombSpawner.OnMapBombs)
         {

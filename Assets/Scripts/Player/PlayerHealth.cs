@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -14,6 +15,9 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private List<LifeHeartUI> _lifeHeartJuice;
 
     MeshDestroy MeshDestroy;
+
+    public AudioClip clip;
+    public AudioClip DeathClip;
 
     private void Awake()
     {
@@ -30,6 +34,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (IsInvulnerable) return;
         Health--;
+        SoundManager.Instance.PlaySound(clip);
         StartCoroutine(TimeInvulnerable());
 
         _lifeHeartJuice[Health].DamageJuice();
@@ -37,7 +42,7 @@ public class PlayerHealth : MonoBehaviour
 
         if(Health <= 0)
         {
-            StartCoroutine(Death());
+            Death();
         }
     }
 
@@ -48,11 +53,14 @@ public class PlayerHealth : MonoBehaviour
         IsInvulnerable = false;
     }
 
-    public IEnumerator Death()
+    public async void Death()
     {
         Time.timeScale = 0.25f;
         MeshDestroy.DestroyMesh();
-        yield return new WaitForSeconds(3f);
+        SoundManager.Instance.PlayMusic(DeathClip);
+        SoundManager.Instance._musicSource.loop = false;
+        await Task.Delay(2000);
         Time.timeScale = 1f;
+        
     }
 }

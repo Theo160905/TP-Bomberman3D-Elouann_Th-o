@@ -34,7 +34,6 @@ public class PlayerHealth : MonoBehaviour
 
         _lifeHeartJuice[Health].DamageJuice();
         if (Health == 1) StartCoroutine(_lifeHeartJuice[0].CriticalJuice());
-        _lifeHeartJuice[Health].Juice();
 
         if(Health <= 0)
         {

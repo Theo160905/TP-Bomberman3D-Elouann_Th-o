@@ -46,6 +46,7 @@ public class IABehaviour : MonoBehaviour
         //{
         //    if (Agent.isStopped) return;
         //}
+        AdditionalTarget = Agent.destination;
     }
 
     private void FixedUpdate()
@@ -180,7 +181,6 @@ public class IABehaviour : MonoBehaviour
             }
         }
 
-        //print($"Nearest bomb : {nearestBomb}, {nearestBomb.transform.position}");
         return nearestBomb;
     }
 #endregion

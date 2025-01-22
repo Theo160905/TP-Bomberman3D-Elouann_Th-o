@@ -14,13 +14,7 @@ public class IASeekBombState : IABaseState
     }
 
     public override void UpdateState(IAStateManager iaState)
-    {
-        // comportement
-        if (iaState.Behaviour.GetNearestBomb() != null)
-        {
-            iaState.Behaviour.Agent.destination = iaState.Behaviour.GetNearestBomb().transform.position;
-        }
-
+    {        
         // si conditions validées, change state
 
         #region State Change Conditions
@@ -33,10 +27,12 @@ public class IASeekBombState : IABaseState
         // Hunt
         if (_hasToChange) iaState.SwitchState(iaState.IAHuntState);
         #endregion
-
-        /// si bombe trouvée --> hunt state
-        /// si bombe dangereuse posée --> run state
-        /// si vie = 0 --> death state
+        
+        // comportement
+        if (iaState.Behaviour.GetNearestBomb() != null)
+        {
+            iaState.Behaviour.Agent.destination = iaState.Behaviour.GetNearestBomb().transform.position;
+        }
     }
 
     private static bool _hasToChange;

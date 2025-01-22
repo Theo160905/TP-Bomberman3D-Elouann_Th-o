@@ -46,7 +46,6 @@ public class GameChrono : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(CoroutineResumeTimer());
         ResumeTimer();
     }
 
@@ -54,7 +53,7 @@ public class GameChrono : MonoBehaviour
     {
         _isPlaying = true;
         StartCoroutine(CoroutineResumeTimer());
-        //OnResume.Invoke();
+        OnResume?.Invoke();
     }
 
     public void PauseTimer()
@@ -68,7 +67,7 @@ public class GameChrono : MonoBehaviour
         while (_isPlaying)
         {
             Timer += 0.01f;
-            _inGameChrono.text = String.Format("{0:0.00}", Timer);
+            if(_inGameChrono != null) _inGameChrono.text = String.Format("{0:0.00}", Timer);
             yield return new WaitForSeconds(0.01f);
         }
     }

@@ -141,7 +141,7 @@ public class Bomb : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (!other.CompareTag("Player")) return;
+        if (!other.CompareTag("Player") | CanBeRecup) return;
         Collider.isTrigger = false;
     }
 }

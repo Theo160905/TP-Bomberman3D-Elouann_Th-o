@@ -13,9 +13,12 @@ public class PlayerHealth : MonoBehaviour
 
     [SerializeField] private List<LifeHeartUI> _lifeHeartJuice;
 
+    MeshDestroy MeshDestroy;
+
     private void Awake()
     {
         Health = 3;
+        MeshDestroy = GetComponent<MeshDestroy>();
     }
 
     public void AddHealth()
@@ -30,6 +33,11 @@ public class PlayerHealth : MonoBehaviour
         StartCoroutine(TimeInvulnerable());
 
         _lifeHeartJuice[Health].Juice();
+
+        if(Health <= 0)
+        {
+            StartCoroutine(Death());
+        }
     }
 
     public IEnumerator TimeInvulnerable()
@@ -37,5 +45,13 @@ public class PlayerHealth : MonoBehaviour
         IsInvulnerable = true;
         yield return new WaitForSeconds(3f);
         IsInvulnerable = false;
+    }
+
+    public IEnumerator Death()
+    {
+        Time.timeScale = 0.25f;
+        MeshDestroy.DestroyMesh();
+        yield return new WaitForSeconds(3f);
+        Time.timeScale = 1f;
     }
 }

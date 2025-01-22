@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 1377364072357354291}
   - component: {fileID: 7966616349035507802}
   - component: {fileID: 3637597547254117773}
+  - component: {fileID: -1994438448858988218}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -273,6 +274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 400d315ad62cd5246883ab22eb947053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bombUI: {fileID: 0}
 --- !u!114 &7966616349035507802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,7 +300,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c7e1454d24165b4889a7f49bc6cdb7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 3
+  _lifeHeartJuice: []
+--- !u!114 &-1994438448858988218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917773555504654334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6afc1c4329b9b02498e43e99c3ce8c66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CutCascades: 3
+  ExplodeForce: 10
 --- !u!1 &5848579250022760392
 GameObject:
   m_ObjectHideFlags: 0

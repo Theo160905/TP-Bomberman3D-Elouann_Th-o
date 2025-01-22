@@ -9,6 +9,8 @@ public class WinCondition : MonoBehaviour
     public PlayerHealth player1;
     public PlayerHealth player2;
 
+    public GameObject WinObject;
+
     void FixedUpdate()
     {
         if (player1 == null && player2 == null) return;
@@ -20,6 +22,7 @@ public class WinCondition : MonoBehaviour
         else if (player2.Health <= 0)
         {
             DisplayWinner("Joueur 1 a gagné !");
+            player2.gameObject.SetActive(false);
         }
     }
 
@@ -27,6 +30,6 @@ public class WinCondition : MonoBehaviour
     {
         PanelWin.SetActive(true);
         winnerText.text = message;
-        Time.timeScale = 0;
+        WinObject.SetActive(true);
     }
 }

@@ -25,6 +25,9 @@ public class LifeHeartUI : MonoBehaviour
 
     public bool IsBroken;
 
+    [SerializeField] private float _yMax;
+    [SerializeField] private float _yMin;
+
     private Sequence _leftHalfSequence;
     private Sequence _rightHalfSequence;
 
@@ -33,6 +36,8 @@ public class LifeHeartUI : MonoBehaviour
         _leftHalfBasePos = _leftHalf.transform.localPosition;
         _rightHalfBasePos = _rightHalf.transform.localPosition;
         _slash.gameObject.SetActive(false);
+
+        StartCoroutine(IdleAnim());
     }
 
     public void DamageJuice()
@@ -50,6 +55,17 @@ public class LifeHeartUI : MonoBehaviour
         _rightHalfSequence.Append(_rightHalf.DOColor(_damagedColor, 0.5f)).Append(_rightHalf.transform.DOLocalRotate(Vector3.back * 15, 0.7f).SetEase(Ease.InOutCubic)).Insert(0.6f, _rightHalf.transform.DOScale(0.8f, 0.5f).SetEase(Ease.OutBounce));
 
         //_slash.transform.DOLocalMove(_slashFinalPos, 0.3f).SetEase(Ease.InOutCubic);
+    }
+
+    private IEnumerator IdleAnim()
+    {
+        while (!IsBroken)
+        {
+            this.transform.DOLocalMoveY(_yMax, 1f);
+            yield return new WaitForSeconds(1f);
+            this.transform.DOLocalMoveY(_yMin, 1f);
+            yield return new WaitForSeconds(1f);
+        }
     }
 
     public IEnumerator CriticalJuice()

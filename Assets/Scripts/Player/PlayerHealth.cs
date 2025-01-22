@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int Health { get; private set;}
+    public int Health { get; private set; }
 
     private bool IsInvulnerable = false;
 
@@ -32,6 +32,8 @@ public class PlayerHealth : MonoBehaviour
         Health--;
         StartCoroutine(TimeInvulnerable());
 
+        _lifeHeartJuice[Health].DamageJuice();
+        if (Health == 1) StartCoroutine(_lifeHeartJuice[0].CriticalJuice());
         _lifeHeartJuice[Health].Juice();
 
         if(Health <= 0)

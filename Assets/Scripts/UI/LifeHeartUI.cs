@@ -23,6 +23,7 @@ public class LifeHeartUI : MonoBehaviour
     [Header("Other")]
     [SerializeField] private Color _damagedColor;
 
+    public bool IsBroken;
 
     private Sequence _leftHalfSequence;
     private Sequence _rightHalfSequence;
@@ -34,23 +35,29 @@ public class LifeHeartUI : MonoBehaviour
         _slash.gameObject.SetActive(false);
     }
 
-    public void Juice()
+    public void DamageJuice()
     {
+        IsBroken = true;
+
         _leftHalfSequence = DOTween.Sequence();
         _rightHalfSequence = DOTween.Sequence();
-        _slash.gameObject.SetActive(true);
-        
+        //_slash.gameObject.SetActive(true);
+
         _leftHalf.transform.DOLocalMove(_leftHalfFinalPos, 0.6f).SetEase(Ease.OutQuart);
         _leftHalfSequence.Append(_leftHalf.DOColor(_damagedColor, 0.5f)).Append(_leftHalf.transform.DOLocalRotate(Vector3.forward * 15, 0.7f).SetEase(Ease.InOutCubic)).Insert(0.6f, _leftHalf.transform.DOScale(0.8f, 0.5f).SetEase(Ease.OutBounce));
-        
+
         _rightHalf.transform.DOLocalMove(_rightHalfFinalPos, 0.6f).SetEase(Ease.OutQuart);
         _rightHalfSequence.Append(_rightHalf.DOColor(_damagedColor, 0.5f)).Append(_rightHalf.transform.DOLocalRotate(Vector3.back * 15, 0.7f).SetEase(Ease.InOutCubic)).Insert(0.6f, _rightHalf.transform.DOScale(0.8f, 0.5f).SetEase(Ease.OutBounce));
 
-        _slash.transform.DOLocalMove(_slashFinalPos, 0.3f).SetEase(Ease.InOutCubic);
+        //_slash.transform.DOLocalMove(_slashFinalPos, 0.3f).SetEase(Ease.InOutCubic);
     }
 
-    private void Reset()
+    public IEnumerator CriticalJuice()
     {
-
+        while (!IsBroken)
+        {
+            this.transform.DOPunchScale(Vector3.one * 1.1f, 0.4f, 7, 4);
+            yield return new WaitForSeconds(0.6f);
+        }
     }
 }

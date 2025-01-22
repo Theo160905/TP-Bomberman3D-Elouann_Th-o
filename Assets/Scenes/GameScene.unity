@@ -7415,7 +7415,8 @@ MonoBehaviour:
   _leftHalfFinalPos: {x: -55.75, y: 40, z: 0}
   _rightHalfFinalPos: {x: 55.75, y: -40, z: 0}
   _slashFinalPos: {x: 40, y: -145, z: 0}
-  _damagedColor: {r: 0.6313726, g: 0.015365381, b: 0, a: 1}
+  _damagedColor: {r: 0.4264151, g: 0.012947833, b: 0.0024136354, a: 1}
+  IsBroken: 0
 --- !u!1 &637167896
 GameObject:
   m_ObjectHideFlags: 0
@@ -7877,6 +7878,7 @@ MonoBehaviour:
   _rightHalfFinalPos: {x: 55.75, y: -40, z: 0}
   _slashFinalPos: {x: 40, y: -145, z: 0}
   _damagedColor: {r: 0, g: 0.6313726, b: 0.31280318, a: 1}
+  IsBroken: 0
 --- !u!1 &688266189
 GameObject:
   m_ObjectHideFlags: 0
@@ -9355,7 +9357,8 @@ MonoBehaviour:
   _leftHalfFinalPos: {x: -55.75, y: 40, z: 0}
   _rightHalfFinalPos: {x: 55.75, y: -40, z: 0}
   _slashFinalPos: {x: 40, y: -145, z: 0}
-  _damagedColor: {r: 0.6313726, g: 0.015365381, b: 0, a: 1}
+  _damagedColor: {r: 0.4264151, g: 0.012947833, b: 0.0024136354, a: 1}
+  IsBroken: 0
 --- !u!1 &1111687200
 GameObject:
   m_ObjectHideFlags: 0
@@ -12667,6 +12670,7 @@ MonoBehaviour:
   _rightHalfFinalPos: {x: 55.75, y: -40, z: 0}
   _slashFinalPos: {x: 40, y: -145, z: 0}
   _damagedColor: {r: 0, g: 0.6313726, b: 0.31280318, a: 1}
+  IsBroken: 0
 --- !u!1 &1531093415
 GameObject:
   m_ObjectHideFlags: 0
@@ -14368,7 +14372,8 @@ MonoBehaviour:
   _leftHalfFinalPos: {x: -55.75, y: 40, z: 0}
   _rightHalfFinalPos: {x: 55.75, y: -40, z: 0}
   _slashFinalPos: {x: 40, y: -145, z: 0}
-  _damagedColor: {r: 0.6313726, g: 0.015365381, b: 0, a: 1}
+  _damagedColor: {r: 0.4264151, g: 0.012947833, b: 0.0024136354, a: 1}
+  IsBroken: 0
 --- !u!1 &1837431611
 GameObject:
   m_ObjectHideFlags: 0
@@ -16049,6 +16054,7 @@ MonoBehaviour:
   _rightHalfFinalPos: {x: 55.75, y: -40, z: 0}
   _slashFinalPos: {x: 40, y: -145, z: 0}
   _damagedColor: {r: 0, g: 0.6313726, b: 0.31280318, a: 1}
+  IsBroken: 0
 --- !u!1 &2081464754
 GameObject:
   m_ObjectHideFlags: 0

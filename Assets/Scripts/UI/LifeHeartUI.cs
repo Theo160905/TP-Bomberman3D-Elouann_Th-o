@@ -37,21 +37,27 @@ public class LifeHeartUI : MonoBehaviour
 
     public void DamageJuice()
     {
+        IsBroken = true;
+
         _leftHalfSequence = DOTween.Sequence();
         _rightHalfSequence = DOTween.Sequence();
         //_slash.gameObject.SetActive(true);
-        
+
         _leftHalf.transform.DOLocalMove(_leftHalfFinalPos, 0.6f).SetEase(Ease.OutQuart);
         _leftHalfSequence.Append(_leftHalf.DOColor(_damagedColor, 0.5f)).Append(_leftHalf.transform.DOLocalRotate(Vector3.forward * 15, 0.7f).SetEase(Ease.InOutCubic)).Insert(0.6f, _leftHalf.transform.DOScale(0.8f, 0.5f).SetEase(Ease.OutBounce));
-        
+
         _rightHalf.transform.DOLocalMove(_rightHalfFinalPos, 0.6f).SetEase(Ease.OutQuart);
         _rightHalfSequence.Append(_rightHalf.DOColor(_damagedColor, 0.5f)).Append(_rightHalf.transform.DOLocalRotate(Vector3.back * 15, 0.7f).SetEase(Ease.InOutCubic)).Insert(0.6f, _rightHalf.transform.DOScale(0.8f, 0.5f).SetEase(Ease.OutBounce));
 
         //_slash.transform.DOLocalMove(_slashFinalPos, 0.3f).SetEase(Ease.InOutCubic);
     }
 
-    public void CriticalJuice()
+    public IEnumerator CriticalJuice()
     {
-
+        while (!IsBroken)
+        {
+            this.transform.DOPunchScale(Vector3.one * 1.1f, 0.4f, 7, 4);
+            yield return new WaitForSeconds(0.6f);
+        }
     }
 }

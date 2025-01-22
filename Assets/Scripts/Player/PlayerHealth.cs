@@ -30,7 +30,7 @@ public class PlayerHealth : MonoBehaviour
         StartCoroutine(TimeInvulnerable());
 
         _lifeHeartJuice[Health].DamageJuice();
-        if (Health == 1) _lifeHeartJuice[0].CriticalJuice();
+        if (Health == 1) StartCoroutine(_lifeHeartJuice[0].CriticalJuice());
     }
 
     public IEnumerator TimeInvulnerable()

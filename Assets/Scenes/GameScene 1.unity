@@ -7280,7 +7280,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1994438448858988218, guid: 44286f1e075ef764ab6d5a067eda0546, type: 3}
       propertyPath: ExplodeForce
-      value: 30
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 917656820035975518, guid: 44286f1e075ef764ab6d5a067eda0546, type: 3}
       propertyPath: color.b
@@ -9039,7 +9039,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2565335680884137383, guid: 93225c52109e991469417e5c9cea44bf, type: 3}
       propertyPath: ExplodeForce
-      value: 30
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 1832545734800481254, guid: 93225c52109e991469417e5c9cea44bf, type: 3}
       propertyPath: clip
@@ -17294,7 +17294,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1994438448858988218, guid: 44286f1e075ef764ab6d5a067eda0546, type: 3}
       propertyPath: ExplodeForce
-      value: 30
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 917656820035975518, guid: 44286f1e075ef764ab6d5a067eda0546, type: 3}
       propertyPath: color.b

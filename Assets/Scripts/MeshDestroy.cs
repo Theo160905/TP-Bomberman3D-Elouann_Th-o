@@ -6,6 +6,8 @@ using UnityEngine;
 //Ce script n'a pas réalisé par l'un d'entre nous
 //On la trouvé grâce à un tuto Youtube
 // https://youtu.be/VwGiwDLQ40A?si=xdY974f0qRQWEQwe
+//On a compris le principe mais juste c'était trop long
+
 public class MeshDestroy : MonoBehaviour
 {
     private bool edgeSet = false;

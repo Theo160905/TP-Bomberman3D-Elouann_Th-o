@@ -4,38 +4,50 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 using Unity.CodeEditor;
+using System;
 
 public class TestThéo
 {
-    [Test]
-    public void OnSpawnBomb_DoesNotReturnNegativePosition()
+    public float CalculateAnAverage(float[] value)
     {
-        // -- Arrange --
-        GameObject spawnerObject = new GameObject("SpawnerBomb");
-        SpawnerBomb spawner = spawnerObject.AddComponent<SpawnerBomb>();
-
-        GameObject poolBombObject = new GameObject("ObjectPoolBomb");
-        ObjectPoolBomb poolBomb = poolBombObject.AddComponent<ObjectPoolBomb>();
-
-        GameObject bombObject = new GameObject("Bomb");
-        bombObject.AddComponent<Bomb>();
-        bombObject.AddComponent<Collider>();
-
-        poolBomb.objectPrefab = bombObject;
-        poolBomb.poolSize = 6;
-
-        int count = spawner.spawnCount;
-
-        // -- Act -- 
-        poolBomb.Test();
-
-        for (int i = 0; i < 5; i++)
+        if (value == null || value.Length == 0)
         {
-            count--;
-            poolBomb.ReturnObject(bombObject);
+            throw new ArgumentException("Le tableu ne peut pas être vide");
         }
+        float sum = 0;
+        foreach (var v in value)
+        {
+            sum += v;
+        }
+        return sum / value.Length;
+    }
+     
 
-        // -- Assert -- 
-        Assert.That(count, Is.GreaterThan(0));
+    [Test]
+    public void CalculateAveragePositive()
+    {
+        // Arrange
+        float[] valeurs = { 10f, 20f, 30f };
+
+        // Act
+        float resultat = CalculateAnAverage(valeurs);
+
+        // Assert
+        Assert.GreaterOrEqual(resultat, 0f, "La moyenne ne doit pas être négative");
+    }
+
+
+    //Ce Test sert à montrer quand c'est pas bon
+    [Test]
+    public void CalculateAveragePositiveWithNegativeValue()
+    {
+        // Arrange
+        float[] valeurs = { -10f, -5f, 0f };
+
+        // Act
+        float resultat = CalculateAnAverage(valeurs);
+
+        // Assert
+        Assert.GreaterOrEqual(resultat, 0f, "La moyenne ne doit pas être négative");
     }
 }

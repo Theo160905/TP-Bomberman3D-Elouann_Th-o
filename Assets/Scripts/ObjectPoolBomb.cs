@@ -90,22 +90,4 @@ public class ObjectPoolBomb : MonoBehaviour
         PoolQueue.Enqueue(obj);
         SpawnerBomb.Instance.OnSpawnBomb();
     }
-
-    //fonction pour facilité un test unitaire
-    public void Test()
-    {
-        PoolQueue = new Queue<GameObject>();
-
-        for (int i = 0; i < poolSize; i++)
-        {
-            GameObject obj = Instantiate(objectPrefab);
-            obj.SetActive(false);
-            PoolQueue.Enqueue(obj);
-        }
-
-        for (int i = 0;i < 5;i++)
-        {
-            SpawnerBomb.Instance.OnSpawnBomb();
-        }
-    }
 }

@@ -8,7 +8,8 @@ public class PlayerUseBomb : MonoBehaviour
     public BombUI _bombUI;
 
     private Queue<GameObject> bombList = new();
-    private bool usebomb = false;
+
+    public bool usebomb = false;
 
     public void UseBomb(InputAction.CallbackContext context)
     {
@@ -45,7 +46,7 @@ public class PlayerUseBomb : MonoBehaviour
         }
     }
 
-    private IEnumerator Wait()
+    public IEnumerator Wait()
     {
         usebomb = true;
         yield return new WaitForSeconds(0.25f);

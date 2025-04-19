@@ -20,13 +20,13 @@ public class WinCondition : MonoBehaviour
 
         if (player1.Health <= 0)
         {
-            DisplayWinner("Joueur 2 a gagné !");
-            chrono.enabled = false;
+            DisplayWinner("Joueur 2 a gagne !");
+            chrono.PauseTimer();
         }
         else if (player2.Health <= 0)
         {
-            DisplayWinner("Joueur 1 a gagné !");
-            chrono.enabled = false;
+            DisplayWinner("Joueur 1 a gagne !");
+            chrono.PauseTimer();
         }
     }
 

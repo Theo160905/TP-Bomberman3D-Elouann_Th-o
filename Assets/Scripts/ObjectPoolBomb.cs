@@ -40,7 +40,7 @@ public class ObjectPoolBomb : MonoBehaviour
     }
     #endregion
 
-    void Start()
+    public void Start()
     {
         PoolQueue = new Queue<GameObject>();
 

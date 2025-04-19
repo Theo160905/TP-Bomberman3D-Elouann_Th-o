@@ -8,7 +8,8 @@ public class PlayerUseBomb : MonoBehaviour
     public BombUI _bombUI;
 
     private Queue<GameObject> bombList = new();
-    private bool usebomb = false;
+
+    public bool usebomb = false;
 
     public void UseBomb(InputAction.CallbackContext context)
     {
@@ -33,20 +34,7 @@ public class PlayerUseBomb : MonoBehaviour
         {
             if (other.TryGetComponent(out Bomb bomb))
             {
-                if (!bomb.CanBeRecup | bombList.Count >= 3) return;
-                //for(int i = 0; i < bombList.Count; i++)
-                //{
-                //    if (bombList[i] == null)
-                //    {
-                //        bombList[i] = other.gameObject;
-                //        other.gameObject.SetActive(false);
-                //        bomb.IsOnMap = false;
-                //        bomb.CanBeRecup = false;
-                //        bomb.Collider.isTrigger = true;
-                //        _bombUI.OnPickUpJuice(bombList.Length - 1);
-                //        return;
-                //    }
-                //}             
+                if (!bomb.CanBeRecup | bombList.Count >= 3) return;           
                 bombList.Enqueue(other.gameObject);
                 other.gameObject.SetActive(false);
                 bomb.IsOnMap = false;
@@ -58,7 +46,7 @@ public class PlayerUseBomb : MonoBehaviour
         }
     }
 
-    private IEnumerator Wait()
+    public IEnumerator Wait()
     {
         usebomb = true;
         yield return new WaitForSeconds(0.25f);

@@ -33,31 +33,36 @@ public class IARunState : IABaseState
         }
 
         // behaviour
-        Vector3 centerOfMass;
+        Vector3 centerOfGravity;
         float xSum = 0;
         float zSum = 0;
 
+        // on additionne les positions de chaque bombe détectée
         for (int i = 0; i < iaState.Behaviour.bombDetector.DetectedDangerousBombs.Count; i++)
         {
             xSum += iaState.Behaviour.bombDetector.DetectedDangerousBombs[i].transform.position.x;
             zSum += iaState.Behaviour.bombDetector.DetectedDangerousBombs[i].transform.position.z;
         }
 
+        // puis on divise par leur nombre pour les combiner et ainsi obtenir la position moyenne des bombes
         xSum /= iaState.Behaviour.bombDetector.DetectedDangerousBombs.Count;
         zSum /= iaState.Behaviour.bombDetector.DetectedDangerousBombs.Count;
+        centerOfGravity = new Vector3(xSum, 0, zSum);
 
-        centerOfMass = new Vector3(xSum, 0, zSum);
-        iaState.Behaviour.AdditionalTarget = centerOfMass;
+        iaState.Behaviour.AdditionalTarget = centerOfGravity;
 
-        Vector3 oppositeDir = -(centerOfMass.normalized - iaState.transform.position.normalized) * 5;
+        Vector3 direction = (centerOfGravity - iaState.transform.position).normalized;
+        
+        Vector3 oppositeDir = -direction * 5;
 
-        Vector3 target = (Vector3.Distance(oppositeDir, iaState.Behaviour.transform.position) > 3) ? oppositeDir : oppositeDir + Vector3.right * UnityEngine.Random.Range(-4, 4);
+        //Vector3 target = (Vector3.Distance(oppositeDir, iaState.Behaviour.transform.position) > 3) ? oppositeDir : oppositeDir + Vector3.right * UnityEngine.Random.Range(-4, 4);
 
         NavMeshHit hit;
-        if (NavMesh.SamplePosition(oppositeDir, out hit, 0.5f, NavMesh.AllAreas))
-        {
+        //if (NavMesh.SamplePosition(oppositeDir, out hit, 0.5f, NavMesh.AllAreas))
+        //{
+            Debug.Log(oppositeDir);
             iaState.Behaviour.Agent.SetDestination(oppositeDir);
-        }
+        //}
 
     }
 }

@@ -42,6 +42,7 @@ public class IAStateManager : MonoBehaviour
     {
         _currentState = state;
         _currentState.EnterState(this);
+        print("switched to " + _currentState);
         UpdateCurrentStateEnum();
     }
 

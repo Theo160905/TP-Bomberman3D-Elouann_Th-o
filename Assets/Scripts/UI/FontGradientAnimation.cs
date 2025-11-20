@@ -76,7 +76,7 @@ public class FontGradientAnimation : MonoBehaviour
 
     Vector2 Wobble(float time)
     {
-        return new Vector2(Mathf.Sin(time * 3.3f), Mathf.Cos(time * 2.5f));
+        return new Vector2(Mathf.Sin(time * 100f), Mathf.Cos(time * 100f));
     }
 
     public void ToggleAnimationOff()

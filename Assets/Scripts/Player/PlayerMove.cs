@@ -47,6 +47,7 @@ public class PlayerMove: MonoBehaviour
         float movementZ = Mathf.Pow(Mathf.Abs(speedDifZ) * accelRateY, _walkVelPower) * Mathf.Sign(speedDifZ);
 
         Vector3 movementForce = Vector3.right * movementX + Vector3.forward * movementZ;
+        
 
         _rb.AddForce(movementForce);
 
@@ -63,5 +64,11 @@ public class PlayerMove: MonoBehaviour
             frictionZ *= Mathf.Sign(_rb.velocity.y);
             _rb.AddForce(Vector3.forward * -frictionZ);
         }
+
+        if (moveInput.x == 0) this.transform.position = new Vector3(Mathf.RoundToInt(this.transform.position.x), this.transform.position.y, this.transform.position.z);
+        if (moveInput.y == 0) this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, Mathf.RoundToInt(this.transform.position.z));
+
+
+        if (moveInput != Vector2.zero) this.transform.rotation = Quaternion.LookRotation(new Vector3(-moveInput.y, 0, moveInput.x));
     }
 }

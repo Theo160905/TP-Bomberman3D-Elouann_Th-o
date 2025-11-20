@@ -68,8 +68,8 @@ public class PlayerMovement : MonoBehaviour
 
         
         //if (moveInput == Vector2.zero) this.transform.position = new Vector3(Mathf.RoundToInt(this.transform.position.x), this.transform.position.y, Mathf.RoundToInt(this.transform.position.z));
-        if (moveInput.x == 0) this.transform.position = new Vector3(Mathf.RoundToInt(this.transform.position.x), this.transform.position.y, this.transform.position.z);
-        if (moveInput.y == 0) this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, Mathf.RoundToInt(this.transform.position.z));
+        //if (moveInput.x == 0) this.transform.position = new Vector3(Mathf.RoundToInt(this.transform.position.x), this.transform.position.y, this.transform.position.z);
+        //if (moveInput.y == 0) this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, Mathf.RoundToInt(this.transform.position.z));
 
          
         if (moveInput != Vector2.zero) this.transform.rotation = Quaternion.LookRotation(new Vector3(-moveInput.y, 0, moveInput.x));
